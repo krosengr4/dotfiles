@@ -1,0 +1,135 @@
+# Template file automatically created at the following path:
+#   /Users/kevinrosengren/Library/Application Support/com.mitchellh.ghostty/config
+
+# ***** Ghostty docs: https://ghostty.org/docs/config/reference
+
+# Run `ghostty +show-config --default --docs` to view a list of
+# all available config options and their default values.
+
+# Additionally, each config option is also explained in detail
+# on Ghostty's website, at https://ghostty.org/docs/config
+
+ # Some config options have unique syntaxes for their value,
+# # which is explained in the docs for that config option.
+# # Just for example:
+# resize-overlay-duration = 4s 200ms
+
+##########################################################################################
+
+#Favorite Themes
+#-----------------------------
+theme = glacier
+#theme = Apple classic
+#theme = Homebrew
+#theme = Argonaut 
+#theme = ayu
+#theme = fahrenheit
+#theme = Carbonfox
+#theme = Catppuccin Mocha
+
+#Other Themes
+#-----------------------------
+#theme = Flatland
+#theme = Aurora
+#theme = 12-bit Rainbow
+#theme = Cyberdyne
+#theme = ENCOM
+#theme = phala green dark
+#theme = catppuccin mocha
+#theme = ciapre
+#theme = floraverse
+#theme = Cobalt Next Dark
+#theme = CGA
+#theme = Elementary
+
+background-opacity = .95
+background-blur = 10
+
+window-theme = ghostty
+
+# Cursor
+
+shell-integration-features = no-cursor
+cursor-style = block_hollow
+cursor-style-blink = true
+cursor-color = #00DAFF
+
+# Font
+
+#font-family = Fira Code
+#font-family = Hack
+#font-family = JetBrains Mono
+#font-family = Inconsolata
+#font-family = Monaco
+#font-family = Menlo
+#font-family = Space Mono
+font-family = Cascadia Code
+#font-family = Source Code Pro
+
+font-size = 20
+
+# MacOS Ghostty Icon
+#------------------------------
+#macos-icon = official
+#macos-icon = blueprint
+macos-icon = chalkboard
+#macos-icon = microchip
+#macos-icon = glass
+#macos-icon = holographic
+#macos-icon = paper
+#macos-icon = retro
+#macos-icon = xray
+
+# Key-binds
+
+keybind = cmd+d=new_split:right
+keybind = cmd+s=new_split:left
+# cmd + shift + d creates new split down
+keybind = cmd+e=new_tab
+
+
+keybind = cmd+p=toggle_command_palette
+keybind = cmd+z=undo
+keybind = cmd+f=toggle_maximize
+keybind = cmd+r=reload_config
+keybind = cmd+i=inspector:toggle
+keybind = cmd+u=check_for_updates
+keybind = ctrl+[=scroll_page_up
+keybind = ctrl+]=scroll_page_down
+
+
+# Window size and position upon opening
+
+window-save-state = never
+
+window-height = 40
+window-width = 120
+
+window-position-x = 100
+window-position-y = 150
+
+# Quick Terminal
+quick-terminal-animation-duration = 0
+quick-terminal-screen = mouse
+quick-terminal-position = center
+quick-terminal-size = 80%, 65%
+keybind = global:cmd+backquote=toggle_quick_terminal
+
+
+# Extras
+
+split-divider-color = #00DAFF
+window-inherit-working-directory = true
+window-colorspace = srgb
+
+window-show-tab-bar = always
+macos-titlebar-style = transparent
+
+macos-shortcuts = allow
+
+window-padding-x = 10
+
+keybind = shift+enter=text:\x1b\r
+
+macos-option-as-alt = true
+

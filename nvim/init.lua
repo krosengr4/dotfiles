@@ -1,0 +1,80 @@
+-- ~/.config/nvim/init.lua
+
+-- ====================================================================
+-- BOOTSTRAP LAZY.NVIM (KEEP THIS BLOCK AT THE VERY TOP)
+-- ====================================================================
+local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    'git',
+    'clone',
+    '--filter=blob:none',
+    'https://github.com/folke/lazy.nvim.git',
+    '--branch=stable', -- latest stable release
+    lazypath,
+  })
+end
+vim.opt.rtp:prepend(lazypath)
+
+-- ====================================================================
+-- PLUGIN MANAGER SETUP (Call setup ONLY ONCE!)
+-- ====================================================================
+require('lazy').setup({
+    -- This table tells lazy.nvim to load all the plugins defined
+    -- in the 'lua/plugins/' directory, which is where your themes.lua should be.
+    { import = 'plugins' },
+}, {})
+-- If your themes.lua is NOT in a `lua/plugins/` directory,
+-- you would use: `require('lazy').setup(require('themes'))` instead.
+
+
+-- ====================================================================
+-- BASIC EDITOR SETTINGS (Keep your existing settings here)
+-- ====================================================================
+
+-- Set the leader key to a space
+vim.g.mapleader = ' '
+
+-- Enable syntax highlighting
+vim.cmd.syntax('on')
+
+-- Set background for better theme rendering (usually 'dark' or 'light')
+vim.opt.background = 'dark' 
+
+-- Enable line numbers (absolute and relative)
+vim.opt.number = true
+-- vim.opt.relativenumber = true
+
+-- Set the tab size and auto-indent settings
+vim.opt.tabstop = 4     
+vim.opt.shiftwidth = 4  
+vim.opt.expandtab = true
+
+-- Better navigation
+vim.opt.wrap = false    
+vim.opt.smartindent = true 
+
+-- Better searching
+vim.opt.incsearch = true  
+vim.opt.hlsearch = true   
+
+-- Mouse support
+vim.opt.mouse = 'a'     
+
+-- Keymaps
+vim.keymap.set({'n', 'v'}, '<leader>y', '"+y', { desc = 'Yank to clipboard' })
+vim.keymap.set({'n', 'v'}, '<leader>p', '"+p', { desc = 'Paste from clipboard' })
+vim.api.nvim_create_user_command('DiffOrig', function()                                                                                                      local ft = vim.bo.filetype
+    vim.cmd('vnew | set bt=nofile | r ++edit # | 0d_ | diffthis | wincmd p | diffthis')                                                                        vim.bo.filetype = ft
+end, {})
+
+-- Enable system clipboard
+vim.opt.clipboard = "unnamedplus"
+
+-- Cmd+C to copy (visual mode)
+vim.keymap.set("v", "<D-c>", '"+y')
+
+-- Cmd+V to paste (normal, visual, insert modes)
+vim.keymap.set("n", "<D-v>", '"+p')
+vim.keymap.set("v", "<D-v>", '"+p')
+vim.keymap.set("i", "<D-v>", '<C-r>+')
