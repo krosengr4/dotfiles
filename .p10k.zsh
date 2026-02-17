@@ -31,7 +31,7 @@
 
   # The list of segments shown on the left. Fill it with the most important segments.
   typeset -g POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(
-    custom_logo             # custom cowboy logo
+    os_icon                 # macOS apple logo
     dir                     # current directory
     vcs                     # git status
     # prompt_char           # prompt symbol
@@ -351,9 +351,9 @@
     if (( $1 )); then
       # Styling for up-to-date Git status.
       local       meta='%246F'  # grey foreground
-      local      clean='%76F'   # green foreground
-      local   modified='%178F'  # yellow foreground
-      local  untracked='%39F'   # blue foreground
+      local      clean="${MY_GIT_CLEAN_COLOR:-%76F}"   # green foreground (overridable via MY_GIT_CLEAN_COLOR)
+      local   modified="${MY_GIT_MODIFIED_COLOR:-%178F}"   # yellow foreground (overridable via MY_GIT_MODIFIED_COLOR)
+      local  untracked="${MY_GIT_UNTRACKED_COLOR:-%39F}"   # blue foreground (overridable via MY_GIT_UNTRACKED_COLOR)
       local conflicted='%196F'  # red foreground
     else
       # Styling for incomplete and stale Git status.
@@ -403,22 +403,6 @@
       res+=" ${modified}wip"
     fi
 
-    if (( VCS_STATUS_COMMITS_AHEAD || VCS_STATUS_COMMITS_BEHIND )); then
-      # ⇣42 if behind the remote.
-      (( VCS_STATUS_COMMITS_BEHIND )) && res+=" ${clean}⇣${VCS_STATUS_COMMITS_BEHIND}"
-      # ⇡42 if ahead of the remote; no leading space if also behind the remote: ⇣42⇡42.
-      (( VCS_STATUS_COMMITS_AHEAD && !VCS_STATUS_COMMITS_BEHIND )) && res+=" "
-      (( VCS_STATUS_COMMITS_AHEAD  )) && res+="${clean}⇡${VCS_STATUS_COMMITS_AHEAD}"
-    elif [[ -n $VCS_STATUS_REMOTE_BRANCH ]]; then
-      # Tip: Uncomment the next line to display '=' if up to date with the remote.
-      # res+=" ${clean}="
-    fi
-
-    # ⇠42 if behind the push remote.
-    (( VCS_STATUS_PUSH_COMMITS_BEHIND )) && res+=" ${clean}⇠${VCS_STATUS_PUSH_COMMITS_BEHIND}"
-    (( VCS_STATUS_PUSH_COMMITS_AHEAD && !VCS_STATUS_PUSH_COMMITS_BEHIND )) && res+=" "
-    # ⇢42 if ahead of the push remote; no leading space if also behind: ⇠42⇢42.
-    (( VCS_STATUS_PUSH_COMMITS_AHEAD  )) && res+="${clean}⇢${VCS_STATUS_PUSH_COMMITS_AHEAD}"
     # *42 if have stashes.
     (( VCS_STATUS_STASHES        )) && res+=" ${clean}*${VCS_STATUS_STASHES}"
     # 'merge' if the repo is in an unusual state.
@@ -482,26 +466,80 @@
   # These settings are used for repositories other than Git or when gitstatusd fails and
   # Powerlevel10k has to fall back to using vcs_info.
 
-  ### GLACIER CONFIG ###
+  ### DYNAMIC GHOSTTY THEME CONFIG ###
 
-  # Directory coloring
-  typeset -g POWERLEVEL9K_DIR_FOREGROUND=81
-  typeset -g POWERLEVEL9K_DIR_BACKGROUND=238
+  # Detect the active Ghostty theme (first non-commented theme= line)
+  local _ghostty_theme=""
+  local _ghostty_config="$HOME/.config/ghostty/config"
+  if [[ -f "$_ghostty_config" ]]; then
+    _ghostty_theme=$(grep -E "^theme[[:space:]]*=" "$_ghostty_config" | tail -1 | sed 's/^theme[[:space:]]*=[[:space:]]*//' | sed 's/[[:space:]]*$//')
+  fi
 
-  # Git Branch Coloring 
-  # Clean
-  typeset -g POWERLEVEL9K_VCS_CLEAN_FOREGROUND=81
-  typeset -g POWERLEVEL9K_VCS_CLEAN_BACKGROUND=18
-  ## Untracked
-  typeset -g POWERLEVEL9K_VCS_UNTRACKED_FOREGROUND=245
-  typeset -g POWERLEVEL9K_VCS_UNTRACKED_BACKGROUND=18
-  ## Modified
-  typeset -g POWERLEVEL9K_VCS_MODIFIED_FOREGROUND=16
-  typeset -g POWERLEVEL9K_VCS_MODIFIED_BACKGROUND=18
+  if [[ "$_ghostty_theme" == "glacier" ]]; then
 
-  # Time 
-  typeset -g POWERLEVEL9K_TIME_FOREGROUND=81
-  typeset -g POWERLEVEL9K_TIME_BACKGROUND=5
+    # OS Icon (Apple logo)
+    typeset -g POWERLEVEL9K_OS_ICON_FOREGROUND=255
+    typeset -g POWERLEVEL9K_OS_ICON_BACKGROUND=237
+
+    # Directory coloring
+    typeset -g POWERLEVEL9K_DIR_FOREGROUND=81
+    typeset -g POWERLEVEL9K_DIR_BACKGROUND=238
+
+    # Git Branch Coloring
+    # Clean
+    typeset -g POWERLEVEL9K_VCS_CLEAN_FOREGROUND=81
+    typeset -g POWERLEVEL9K_VCS_CLEAN_BACKGROUND=18
+    typeset -g MY_GIT_CLEAN_COLOR='%81F'
+    ## Untracked
+    typeset -g POWERLEVEL9K_VCS_UNTRACKED_FOREGROUND=245
+    typeset -g POWERLEVEL9K_VCS_UNTRACKED_BACKGROUND=18
+    typeset -g MY_GIT_UNTRACKED_COLOR='%81'
+    ## Modified
+    typeset -g POWERLEVEL9K_VCS_MODIFIED_FOREGROUND=16
+    typeset -g POWERLEVEL9K_VCS_MODIFIED_BACKGROUND=18
+    typeset -g MY_GIT_MODIFIED_COLOR='%196'
+
+    # Time
+    typeset -g POWERLEVEL9K_TIME_FOREGROUND=81
+    typeset -g POWERLEVEL9K_TIME_BACKGROUND=5
+
+    # Status OK (✔)
+    typeset -g POWERLEVEL9K_STATUS_OK_FOREGROUND=70
+    typeset -g POWERLEVEL9K_STATUS_OK_BACKGROUND=237
+
+  elif [[ "$_ghostty_theme" == "Ciapre" ]]; then
+
+    # OS Icon (Apple logo)
+    typeset -g POWERLEVEL9K_OS_ICON_FOREGROUND=232 
+    typeset -g POWERLEVEL9K_OS_ICON_BACKGROUND=1 
+
+    # Directory coloring
+    typeset -g POWERLEVEL9K_DIR_FOREGROUND=14  
+    typeset -g POWERLEVEL9K_DIR_BACKGROUND=1  
+
+    # Git Branch Coloring
+    # Clean
+    typeset -g POWERLEVEL9K_VCS_CLEAN_FOREGROUND=33
+    typeset -g POWERLEVEL9K_VCS_CLEAN_BACKGROUND=6   
+    typeset -g MY_GIT_CLEAN_COLOR='%33F'            
+    ## Untracked
+    typeset -g POWERLEVEL9K_VCS_UNTRACKED_FOREGROUND=33 
+    typeset -g POWERLEVEL9K_VCS_UNTRACKED_BACKGROUND=6 
+    typeset -g MY_GIT_UNTRACKED_COLOR='%33F'
+    ## Modified
+    typeset -g POWERLEVEL9K_VCS_MODIFIED_FOREGROUND=33
+    typeset -g POWERLEVEL9K_VCS_MODIFIED_BACKGROUND=6
+    typeset -g MY_GIT_MODIFIED_COLOR='%196F'           
+
+    # Time
+    typeset -g POWERLEVEL9K_TIME_FOREGROUND=  # TODO: set your Ciapre color
+    typeset -g POWERLEVEL9K_TIME_BACKGROUND=6  # TODO: set your Ciapre color
+
+    # Status OK (✔)
+    typeset -g POWERLEVEL9K_STATUS_OK_FOREGROUND=46  # TODO: set your Ciapre color
+    typeset -g POWERLEVEL9K_STATUS_OK_BACKGROUND=5  # TODO: set your Ciapre color
+
+  fi
 
   ##########################[ status: exit code of the last command ]###########################
   # Enable OK_PIPE, ERROR_PIPE and ERROR_SIGNAL status states to allow us to enable, disable and
@@ -511,7 +549,6 @@
   # Status on success. No content, just an icon. No need to show it if prompt_char is enabled as
   # it will signify success by turning green.
   typeset -g POWERLEVEL9K_STATUS_OK=true
-  typeset -g POWERLEVEL9K_STATUS_OK_FOREGROUND=70
   typeset -g POWERLEVEL9K_STATUS_OK_VISUAL_IDENTIFIER_EXPANSION='✔'
 
   # Status when some part of a pipe command fails but the overall exit status is zero. It may look
@@ -1692,11 +1729,11 @@
   function prompt_custom_logo() {
     # Single character options (uncomment one or add your own):
     # local icon=''    # Apple logo (requires Nerd Font)
-    # local icon='󰀵'    # Apple logo alt (requires Nerd Font v3)
+    local icon='󰀵'    # Apple logo alt (requires Nerd Font v3)
     # local icon=''    # Rocket
     # local icon=''    # Lightning bolt
     # local icon='⚡'    # Lightning bolt (unicode)
-    local icon='🤠'     # Codea Cowboy
+    # local icon='🤠'     # Codea Cowboy
     # local icon='◆'    # Diamond
     # local icon='▲'    # Triangle
     # local icon='◉'    # Circle with dot
@@ -1718,7 +1755,7 @@
     # Use white/light colors with a subtle background for the fade effect
     # Color 255 = white, 254 = light gray, 250 = very light gray
     # For backgrounds: 237 = dark gray, 238 = slightly lighter dark gray
-    p10k segment -b 237 -f 255 -i "$icon"
+    p10k segment -b 237 -f 255 -t "$icon"
   }
 
   # Instant prompt version
