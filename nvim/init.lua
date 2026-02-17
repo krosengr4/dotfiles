@@ -16,6 +16,9 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+-- Set leader key before lazy
+vim.g.mapleader = ' '
+
 -- ====================================================================
 -- PLUGIN MANAGER SETUP (Call setup ONLY ONCE!)
 -- ====================================================================
@@ -43,7 +46,7 @@ vim.opt.background = 'dark'
 
 -- Enable line numbers (absolute and relative)
 vim.opt.number = true
--- vim.opt.relativenumber = true
+vim.opt.relativenumber = true
 
 -- Set the tab size and auto-indent settings
 vim.opt.tabstop = 4     
