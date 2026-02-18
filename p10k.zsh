@@ -31,7 +31,7 @@
 
   # The list of segments shown on the left. Fill it with the most important segments.
   typeset -g POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(
-    os_icon                 # macOS apple logo
+    os_icon
     dir                     # current directory
     vcs                     # git status
     # prompt_char           # prompt symbol
@@ -42,7 +42,8 @@
   # automatically hidden when the input line reaches it. Right prompt above the
   # last prompt line gets hidden if it would overlap with left prompt.
   typeset -g POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(
-    status                  # exit code of the last command
+    battery
+    # status                  # exit code of the last command
     command_execution_time  # duration of the last command
     background_jobs         # presence of background jobs
     direnv                  # direnv status (https://direnv.net/)
@@ -132,7 +133,7 @@
   typeset -g POWERLEVEL9K_ICON_BEFORE_CONTENT=
 
   # Add an empty line before each prompt.
-  typeset -g POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
+  typeset -g POWERLEVEL9K_PROMPT_ADD_NEWLINE=false
 
   # Connect left prompt lines with these symbols. You'll probably want to use the same color
   # as POWERLEVEL9K_MULTILINE_FIRST_PROMPT_GAP_FOREGROUND below.
@@ -180,7 +181,7 @@
   # The left end of right prompt.
   typeset -g POWERLEVEL9K_RIGHT_PROMPT_FIRST_SEGMENT_START_SYMBOL='\uE0BA'
   # The left end of left prompt.
-  typeset -g POWERLEVEL9K_LEFT_PROMPT_FIRST_SEGMENT_START_SYMBOL='░▒▓'
+  typeset -g POWERLEVEL9K_LEFT_PROMPT_FIRST_SEGMENT_START_SYMBOL='░░▒▓█'
   # The right end of right prompt.
   typeset -g POWERLEVEL9K_RIGHT_PROMPT_LAST_SEGMENT_END_SYMBOL='▓▒░'
   # Left prompt terminator for lines without any segments.
@@ -505,9 +506,16 @@
     typeset -g POWERLEVEL9K_TIME_FOREGROUND=81
     typeset -g POWERLEVEL9K_TIME_BACKGROUND=5
 
-    # Status OK (✔)
-    typeset -g POWERLEVEL9K_STATUS_OK_FOREGROUND=70
-    typeset -g POWERLEVEL9K_STATUS_OK_BACKGROUND=237
+    # Battery
+    typeset -g POWERLEVEL9K_BATTERY_LOW_THRESHOLD=20
+    typeset -g POWERLEVEL9K_BATTERY_LOW_FOREGROUND=160
+    typeset -g POWERLEVEL9K_BATTERY_LOW_BACKGROUND=52
+
+    typeset -g POWERLEVEL9K_BATTERY_{CHARGING,CHARGED}_FOREGROUND=64
+    typeset -g POWERLEVEL9K_BATTERY_{CHARGING,CHARGED}_BACKGROUND=52
+
+    typeset -g POWERLEVEL9K_BATTERY_DISCONNECTED_FOREGROUND=64
+    typeset -g POWERLEVEL9K_BATTERY_DISCONNECTED_BACKGROUND=58
 
     # ls directory colors (bright cyan #81 on default bg)
     export LSCOLORS="Gxfxcxdxbxegedabagacad"
@@ -519,11 +527,11 @@
 
     # OS Icon (Apple logo)
     typeset -g POWERLEVEL9K_OS_ICON_FOREGROUND=232 
-    typeset -g POWERLEVEL9K_OS_ICON_BACKGROUND=1 
+    typeset -g POWERLEVEL9K_OS_ICON_BACKGROUND=52
 
     # Directory coloring
     typeset -g POWERLEVEL9K_DIR_FOREGROUND=14  
-    typeset -g POWERLEVEL9K_DIR_BACKGROUND=1  
+    typeset -g POWERLEVEL9K_DIR_BACKGROUND=52
 
     # Git Branch Coloring
     # Clean
@@ -540,12 +548,19 @@
     typeset -g MY_GIT_MODIFIED_COLOR='%196F'           
 
     # Time
-    typeset -g POWERLEVEL9K_TIME_FOREGROUND=  # TODO: set your Ciapre color
-    typeset -g POWERLEVEL9K_TIME_BACKGROUND=6  # TODO: set your Ciapre color
+    typeset -g POWERLEVEL9K_TIME_FOREGROUND=
+    typeset -g POWERLEVEL9K_TIME_BACKGROUND=6
 
-    # Status OK (✔)
-    typeset -g POWERLEVEL9K_STATUS_OK_FOREGROUND=46  # TODO: set your Ciapre color
-    typeset -g POWERLEVEL9K_STATUS_OK_BACKGROUND=5  # TODO: set your Ciapre color
+    # Battery
+    typeset -g POWERLEVEL9K_BATTERY_LOW_THRESHOLD=20
+    typeset -g POWERLEVEL9K_BATTERY_LOW_FOREGROUND=160
+    typeset -g POWERLEVEL9K_BATTERY_LOW_BACKGROUND=52
+
+    typeset -g POWERLEVEL9K_BATTERY_{CHARGING,CHARGED}_FOREGROUND=64
+    typeset -g POWERLEVEL9K_BATTERY_{CHARGING,CHARGED}_BACKGROUND=52
+
+    typeset -g POWERLEVEL9K_BATTERY_DISCONNECTED_FOREGROUND=64
+    typeset -g POWERLEVEL9K_BATTERY_DISCONNECTED_BACKGROUND=58
 
     # ls directory colors (bright cyan #14 on red #1 bg)
     export LSCOLORS="Gbfxcxdxbxegedabagacad"
@@ -566,28 +581,39 @@
     # Git Branch Coloring
     # Clean
     typeset -g POWERLEVEL9K_VCS_CLEAN_FOREGROUND=88
-    typeset -g POWERLEVEL9K_VCS_CLEAN_BACKGROUND=237
+    typeset -g POWERLEVEL9K_VCS_CLEAN_BACKGROUND=235
     typeset -g MY_GIT_CLEAN_COLOR='%13F'            
     ## Untracked
     typeset -g POWERLEVEL9K_VCS_UNTRACKED_FOREGROUND=33 
     typeset -g POWERLEVEL9K_VCS_UNTRACKED_BACKGROUND=8 
-    typeset -g MY_GIT_UNTRACKED_COLOR='%52F'
+    typeset -g MY_GIT_UNTRACKED_COLOR='%12F'
     ## Modified
     typeset -g POWERLEVEL9K_VCS_MODIFIED_FOREGROUND=33
     typeset -g POWERLEVEL9K_VCS_MODIFIED_BACKGROUND=8
-    typeset -g MY_GIT_MODIFIED_COLOR='%52F'           
+    typeset -g MY_GIT_MODIFIED_COLOR='%12F'           
 
     # Time
     typeset -g POWERLEVEL9K_TIME_FOREGROUND=13
-    typeset -g POWERLEVEL9K_TIME_BACKGROUND=237
+    typeset -g POWERLEVEL9K_TIME_BACKGROUND=235
 
     # Status OK (✔)
     typeset -g POWERLEVEL9K_STATUS_OK_FOREGROUND=46
     typeset -g POWERLEVEL9K_STATUS_OK_BACKGROUND=5
 
-    # ls directory colors (tan/orange #137 on dark red #52 bg)
+    # Battery
+    typeset -g POWERLEVEL9K_BATTERY_LOW_THRESHOLD=20
+    typeset -g POWERLEVEL9K_BATTERY_LOW_FOREGROUND=160
+    typeset -g POWERLEVEL9K_BATTERY_LOW_BACKGROUND=52
+
+    typeset -g POWERLEVEL9K_BATTERY_{CHARGING,CHARGED}_FOREGROUND=64
+    typeset -g POWERLEVEL9K_BATTERY_{CHARGING,CHARGED}_BACKGROUND=52
+
+    typeset -g POWERLEVEL9K_BATTERY_DISCONNECTED_FOREGROUND=64
+    typeset -g POWERLEVEL9K_BATTERY_DISCONNECTED_BACKGROUND=58
+
+    # ls directory colors
     export LSCOLORS="dbfxcxdxbxegedabagacad"
-    export LS_COLORS="di=1;4;38;5;19;"
+    export LS_COLORS="di=1;4;38;5;96;"
 
   fi
 
@@ -1694,12 +1720,6 @@
 
   ################################[ battery: internal battery ]#################################
   # Show battery in red when it's below this level and not connected to power supply.
-  typeset -g POWERLEVEL9K_BATTERY_LOW_THRESHOLD=20
-  typeset -g POWERLEVEL9K_BATTERY_LOW_FOREGROUND=160
-  # Show battery in green when it's charging or fully charged.
-  typeset -g POWERLEVEL9K_BATTERY_{CHARGING,CHARGED}_FOREGROUND=70
-  # Show battery in yellow when it's discharging.
-  typeset -g POWERLEVEL9K_BATTERY_DISCONNECTED_FOREGROUND=178
   # Battery pictograms going from low to high level of charge.
   typeset -g POWERLEVEL9K_BATTERY_STAGES='\UF008E\UF007A\UF007B\UF007C\UF007D\UF007E\UF007F\UF0080\UF0081\UF0082\UF0079'
   # Don't show the remaining time to charge/discharge.
@@ -1779,7 +1799,7 @@
   function prompt_custom_logo() {
     # Single character options (uncomment one or add your own):
     # local icon=''    # Apple logo (requires Nerd Font)
-    local icon='󰀵'    # Apple logo alt (requires Nerd Font v3)
+    # local icon='󰀵'    # Apple logo alt (requires Nerd Font v3)
     # local icon=''    # Rocket
     # local icon=''    # Lightning bolt
     # local icon='⚡'    # Lightning bolt (unicode)
