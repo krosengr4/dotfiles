@@ -42,7 +42,7 @@
   # automatically hidden when the input line reaches it. Right prompt above the
   # last prompt line gets hidden if it would overlap with left prompt.
   typeset -g POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(
-    battery
+    # battery
     # status                  # exit code of the last command
     command_execution_time  # duration of the last command
     background_jobs         # presence of background jobs
@@ -507,15 +507,15 @@
     typeset -g POWERLEVEL9K_TIME_BACKGROUND=5
 
     # Battery
-    typeset -g POWERLEVEL9K_BATTERY_LOW_THRESHOLD=20
-    typeset -g POWERLEVEL9K_BATTERY_LOW_FOREGROUND=160
-    typeset -g POWERLEVEL9K_BATTERY_LOW_BACKGROUND=52
+    typeset -g POWERLEVEL9K_BATTERY_LOW_THRESHOLD=10
+    typeset -g POWERLEVEL9K_BATTERY_LOW_FOREGROUND=196
+    typeset -g POWERLEVEL9K_BATTERY_LOW_BACKGROUND=229
 
     typeset -g POWERLEVEL9K_BATTERY_{CHARGING,CHARGED}_FOREGROUND=64
     typeset -g POWERLEVEL9K_BATTERY_{CHARGING,CHARGED}_BACKGROUND=52
 
     typeset -g POWERLEVEL9K_BATTERY_DISCONNECTED_FOREGROUND=64
-    typeset -g POWERLEVEL9K_BATTERY_DISCONNECTED_BACKGROUND=58
+    typeset -g POWERLEVEL9K_BATTERY_DISCONNECTED_BACKGROUND=52
 
     # ls directory colors (bright cyan #81 on default bg)
     export LSCOLORS="Gxfxcxdxbxegedabagacad"
@@ -552,9 +552,9 @@
     typeset -g POWERLEVEL9K_TIME_BACKGROUND=6
 
     # Battery
-    typeset -g POWERLEVEL9K_BATTERY_LOW_THRESHOLD=20
-    typeset -g POWERLEVEL9K_BATTERY_LOW_FOREGROUND=160
-    typeset -g POWERLEVEL9K_BATTERY_LOW_BACKGROUND=52
+    typeset -g POWERLEVEL9K_BATTERY_LOW_THRESHOLD=10
+    typeset -g POWERLEVEL9K_BATTERY_LOW_FOREGROUND=196
+    typeset -g POWERLEVEL9K_BATTERY_LOW_BACKGROUND=229
 
     typeset -g POWERLEVEL9K_BATTERY_{CHARGING,CHARGED}_FOREGROUND=64
     typeset -g POWERLEVEL9K_BATTERY_{CHARGING,CHARGED}_BACKGROUND=52
@@ -596,25 +596,58 @@
     typeset -g POWERLEVEL9K_TIME_FOREGROUND=13
     typeset -g POWERLEVEL9K_TIME_BACKGROUND=235
 
-    # Status OK (✔)
-    typeset -g POWERLEVEL9K_STATUS_OK_FOREGROUND=46
-    typeset -g POWERLEVEL9K_STATUS_OK_BACKGROUND=5
-
     # Battery
-    typeset -g POWERLEVEL9K_BATTERY_LOW_THRESHOLD=20
-    typeset -g POWERLEVEL9K_BATTERY_LOW_FOREGROUND=160
-    typeset -g POWERLEVEL9K_BATTERY_LOW_BACKGROUND=52
+    typeset -g POWERLEVEL9K_BATTERY_LOW_THRESHOLD=10
+    typeset -g POWERLEVEL9K_BATTERY_LOW_FOREGROUND=196
+    typeset -g POWERLEVEL9K_BATTERY_LOW_BACKGROUND=229
 
     typeset -g POWERLEVEL9K_BATTERY_{CHARGING,CHARGED}_FOREGROUND=64
     typeset -g POWERLEVEL9K_BATTERY_{CHARGING,CHARGED}_BACKGROUND=52
 
     typeset -g POWERLEVEL9K_BATTERY_DISCONNECTED_FOREGROUND=64
-    typeset -g POWERLEVEL9K_BATTERY_DISCONNECTED_BACKGROUND=58
+    typeset -g POWERLEVEL9K_BATTERY_DISCONNECTED_BACKGROUND=52
 
     # ls directory colors
     export LSCOLORS="dbfxcxdxbxegedabagacad"
     export LS_COLORS="di=1;4;38;5;96;"
 
+    #####! GHOSTTY ROSE PINE MOON THEME #####
+    
+    elif [[ "$_ghostty_theme" == "Rose Pine Moon" ]]; then
+
+    # OS Icon (Apple logo)
+    typeset -g POWERLEVEL9K_OS_ICON_FOREGROUND=13
+    typeset -g POWERLEVEL9K_OS_ICON_BACKGROUND=232
+
+    # Directory coloring
+    typeset -g POWERLEVEL9K_DIR_FOREGROUND=13
+    typeset -g POWERLEVEL9K_DIR_BACKGROUND=232
+
+    # Git Branch Coloring
+    # Clean
+    typeset -g POWERLEVEL9K_VCS_CLEAN_FOREGROUND=88
+    typeset -g POWERLEVEL9K_VCS_CLEAN_BACKGROUND=60
+    typeset -g MY_GIT_CLEAN_COLOR='%16F'            
+    ## Untracked
+    typeset -g POWERLEVEL9K_VCS_UNTRACKED_FOREGROUND=33 
+    typeset -g POWERLEVEL9K_VCS_UNTRACKED_BACKGROUND=60 
+    typeset -g MY_GIT_UNTRACKED_COLOR='%207F'
+    ## Modified
+    typeset -g POWERLEVEL9K_VCS_MODIFIED_FOREGROUND=33
+    typeset -g POWERLEVEL9K_VCS_MODIFIED_BACKGROUND=60
+    typeset -g MY_GIT_MODIFIED_COLOR='%207F'           
+
+    # Execution Time
+    typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_FOREGROUND=207
+    typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_BACKGROUND=8
+
+    # Time
+    typeset -g POWERLEVEL9K_TIME_FOREGROUND=13
+    typeset -g POWERLEVEL9K_TIME_BACKGROUND=232
+
+    # ls directory colors
+    export LSCOLORS="dbfxcxdxbxegedabagacad"
+    export LS_COLORS="di=1;4;38;5;27;"           
   fi
 
   ##########################[ status: exit code of the last command ]###########################
