@@ -6,67 +6,14 @@
 # Run `ghostty +show-config --default --docs` to view a list of
 # all available config options and their default values.
 
-# Additionally, each config option is also explained in detail
-# on Ghostty's website, at https://ghostty.org/docs/config
-
- # Some config options have unique syntaxes for their value,
-# # which is explained in the docs for that config option.
-# # Just for example:
-# resize-overlay-duration = 4s 200ms
-
 ##########################################################################################
 
-#Favorite Themes
-#-----------------------------
-theme = glacier
-#theme = Apple classic
-#theme = Homebrew
-#theme = Argonaut 
-#theme = ayu
-#theme = fahrenheit
-#theme = Carbonfox
-#theme = Catppuccin Mocha
-
-#Other Themes
-#-----------------------------
-#theme = Flatland
-#theme = Aurora
-#theme = 12-bit Rainbow
-#theme = Cyberdyne
-#theme = ENCOM
-#theme = phala green dark
-#theme = catppuccin mocha
-#theme = ciapre
-#theme = floraverse
-#theme = Cobalt Next Dark
-#theme = CGA
-#theme = Elementary
-
-background-opacity = .95
-background-blur = 10
+background-opacity = .9
+background-blur = 15
 
 window-theme = ghostty
 
-# Cursor
-
-shell-integration-features = no-cursor
-cursor-style = block_hollow
-cursor-style-blink = true
-cursor-color = #00DAFF
-
-# Font
-
-#font-family = Fira Code
-#font-family = Hack
-#font-family = JetBrains Mono
-#font-family = Inconsolata
-#font-family = Monaco
-#font-family = Menlo
-#font-family = Space Mono
-font-family = Cascadia Code
-#font-family = Source Code Pro
-
-font-size = 20
+adjust-cell-height = 40%
 
 # MacOS Ghostty Icon
 #------------------------------
@@ -81,12 +28,11 @@ macos-icon = chalkboard
 #macos-icon = xray
 
 # Key-binds
-
+#------------------------------
 keybind = cmd+d=new_split:right
 keybind = cmd+s=new_split:left
 # cmd + shift + d creates new split down
 keybind = cmd+e=new_tab
-
 
 keybind = cmd+p=toggle_command_palette
 keybind = cmd+z=undo
@@ -97,9 +43,8 @@ keybind = cmd+u=check_for_updates
 keybind = ctrl+[=scroll_page_up
 keybind = ctrl+]=scroll_page_down
 
-
-# Window size and position upon opening
-
+# Window size and position 
+#------------------------------
 window-save-state = never
 
 window-height = 40
@@ -109,18 +54,17 @@ window-position-x = 100
 window-position-y = 150
 
 # Quick Terminal
-quick-terminal-animation-duration = 0
+#------------------------------
+quick-terminal-animation-duration = .2
 quick-terminal-screen = mouse
-quick-terminal-position = center
-quick-terminal-size = 80%, 65%
+quick-terminal-position = top
+quick-terminal-size = 50%, 100%
 keybind = global:cmd+backquote=toggle_quick_terminal
 
-
 # Extras
-
-split-divider-color = #00DAFF
+#------------------------------
 window-inherit-working-directory = true
-window-colorspace = srgb
+window-colorspace = "display-p3"
 
 window-show-tab-bar = always
 macos-titlebar-style = transparent
@@ -133,3 +77,113 @@ keybind = shift+enter=text:\x1b\r
 
 macos-option-as-alt = true
 
+
+
+#!--------------------------------------------------------------------------# THINGS I FREQUENTLY TOUCH #--------------------------------------------------------------------------#
+
+##### Favorite Themes #####
+#--------------------------------------------------------------------------
+#theme = glacier
+theme = Rose Pine Moon
+#theme = fahrenheit
+#theme = Homebrew
+
+
+##### Other Themes #####
+#--------------------------------------------------------------------------
+#theme = Apple classic
+#theme = Argonaut 
+#theme = ayu
+#theme = Carbonfox
+#theme = Catppuccin Mocha
+#theme = Ciapre
+#theme = Flatland
+#theme = Aurora
+#theme = 12-bit Rainbow
+#theme = Cyberdyne
+#theme = ENCOM
+#theme = phala green dark
+#theme = catppuccin mocha
+#theme = floraverse
+#theme = Cobalt Next Dark
+#theme = CGA
+#theme = Elementary
+
+
+################################################################
+
+
+##### Cursor #####
+#--------------------------------------------------------------------------
+shell-integration-features = no-cursor
+cursor-style = block_hollow
+cursor-style-blink = true
+
+# System Red
+#cursor-color = #AB1942
+
+# Orchid
+#cursor-color = #7A81FF
+
+# Faded Brown
+#cursor-color = #AA7942
+
+# Mocha
+#cursor-color = #945200
+
+# Snow White
+cursor-color = #FFFFFF
+
+
+################################################################
+
+
+##### Font #####
+#------------------------ --------------------------------------------------
+#font-family = Fira Code Nerd Font
+#font-family = Hack Nerd Font
+#font-family = JetBrains Mono Nerd Font
+#font-family = Inconsolata Nerd Font
+#font-family = Monaco
+font-family = Menlo
+#font-family = Space Mono Nerd Font
+#font-family = SauceCodePro Nerd Font
+
+font-size = 18
+
+
+################################################################
+
+
+##### Highlighting Color #####
+#--------------------------------------------------------------------------
+##### BACKGROUND #####
+
+# Strawberry
+#selection-background = #FF2F92
+
+# Sky
+#selection-background = #76D6FF
+
+# Honeydew
+#selection-background = #D4FB79
+
+# Orchid
+#selection-background = #7A81FF
+
+# Mocha
+#selection-background = #945200
+
+# Purplish Maroon
+selection-background = #430942
+
+##### FOREGROUND #####
+# Basic light(ish) blue
+selection-foreground = #007DD6
+
+################################################################
+
+##### OTHERS #####
+
+# Snow White
+split-divider-color = #FFFFFF
