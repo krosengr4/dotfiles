@@ -121,6 +121,8 @@ alias gpod='git push origin develop'
 alias gpl="git pull"
 alias gpsh="git push"
 alias gb="git branch"
+alias gpou="git push -u origin"
+alias gco="git checkout"
 
 # Neovim
 alias vi="nvim"
@@ -156,6 +158,7 @@ alias di="docker images"
 # Go aliases
 alias gr="go run"
 alias gmi="go mod init"
+alias gob="go build"
 
 # Ghostty alias
 alias ghothem="ghostty +list-themes"
