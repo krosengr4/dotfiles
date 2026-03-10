@@ -373,7 +373,7 @@
       # Otherwise show the first 12 … the last 12.
       # Tip: To always show local branch name in full without truncation, delete the next line.
       (( $#branch > 32 )) && branch[13,-13]="…"  # <-- this line
-      res+="${clean}${(g::)POWERLEVEL9K_VCS_BRANCH_ICON}${branch//\%/%%}"
+      res+="${clean}${(g::)POWERLEVEL9K_VCS_BRANCH_ICON}%B${branch//\%/%%}%b"
     fi
 
     if [[ -n $VCS_STATUS_TAG
@@ -582,14 +582,14 @@
     # Clean
     typeset -g POWERLEVEL9K_VCS_CLEAN_FOREGROUND=88
     typeset -g POWERLEVEL9K_VCS_CLEAN_BACKGROUND=235
-    typeset -g MY_GIT_CLEAN_COLOR='%13F'            
+    typeset -g MY_GIT_CLEAN_COLOR='%2F'            
     ## Untracked
     typeset -g POWERLEVEL9K_VCS_UNTRACKED_FOREGROUND=33 
-    typeset -g POWERLEVEL9K_VCS_UNTRACKED_BACKGROUND=8 
+    typeset -g POWERLEVEL9K_VCS_UNTRACKED_BACKGROUND=235
     typeset -g MY_GIT_UNTRACKED_COLOR='%12F'
     ## Modified
     typeset -g POWERLEVEL9K_VCS_MODIFIED_FOREGROUND=33
-    typeset -g POWERLEVEL9K_VCS_MODIFIED_BACKGROUND=8
+    typeset -g POWERLEVEL9K_VCS_MODIFIED_BACKGROUND=235
     typeset -g MY_GIT_MODIFIED_COLOR='%12F'           
 
     # Time
@@ -616,11 +616,11 @@
     elif [[ "$_ghostty_theme" == "Rose Pine Moon" ]]; then
 
     # OS Icon (Apple logo)
-    typeset -g POWERLEVEL9K_OS_ICON_FOREGROUND=13
+    typeset -g POWERLEVEL9K_OS_ICON_FOREGROUND=219
     typeset -g POWERLEVEL9K_OS_ICON_BACKGROUND=232
 
     # Directory coloring
-    typeset -g POWERLEVEL9K_DIR_FOREGROUND=13
+    typeset -g POWERLEVEL9K_DIR_FOREGROUND=219
     typeset -g POWERLEVEL9K_DIR_BACKGROUND=232
 
     # Git Branch Coloring
@@ -642,12 +642,51 @@
     typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_BACKGROUND=8
 
     # Time
-    typeset -g POWERLEVEL9K_TIME_FOREGROUND=13
+    typeset -g POWERLEVEL9K_TIME_FOREGROUND=219
     typeset -g POWERLEVEL9K_TIME_BACKGROUND=232
 
     # ls directory colors
     export LSCOLORS="dbfxcxdxbxegedabagacad"
-    export LS_COLORS="di=1;4;38;5;27;"           
+    export LS_COLORS="di=1;4;38;5;27;"
+
+         #!################# GHOSTTY HOMEBREW THEME ############################
+
+      elif [[ "$_ghostty_theme" == "Homebrew" ]]; then
+
+    # OS Icon (Apple logo)
+    typeset -g POWERLEVEL9K_OS_ICON_FOREGROUND=46
+    typeset -g POWERLEVEL9K_OS_ICON_BACKGROUND=234
+
+    # Directory coloring
+    typeset -g POWERLEVEL9K_DIR_FOREGROUND=46
+    typeset -g POWERLEVEL9K_DIR_BACKGROUND=234
+
+    # Git Branch Coloring
+    # Clean
+    typeset -g POWERLEVEL9K_VCS_CLEAN_FOREGROUND=238
+    typeset -g POWERLEVEL9K_VCS_CLEAN_BACKGROUND=240
+    typeset -g MY_GIT_CLEAN_COLOR='%232F'            
+    ## Untracked
+    typeset -g POWERLEVEL9K_VCS_UNTRACKED_FOREGROUND=33 
+    typeset -g POWERLEVEL9K_VCS_UNTRACKED_BACKGROUND=240
+    typeset -g MY_GIT_UNTRACKED_COLOR='%124F'
+    ## Modified
+    typeset -g POWERLEVEL9K_VCS_MODIFIED_FOREGROUND=33
+    typeset -g POWERLEVEL9K_VCS_MODIFIED_BACKGROUND=240
+    typeset -g MY_GIT_MODIFIED_COLOR='%124F'           
+
+    # Time
+    typeset -g POWERLEVEL9K_TIME_FOREGROUND=46
+    typeset -g POWERLEVEL9K_TIME_BACKGROUND=234
+
+    # Execution Time
+    typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_FOREGROUND=231
+    typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_BACKGROUND=28
+
+    # ls directory colors
+    export LSCOLORS="dbfxcxdxbxegedabagacad"
+    export LS_COLORS="di=1;4;38;5;27;"
+               
   fi
 
   ##########################[ status: exit code of the last command ]###########################
@@ -1878,7 +1917,7 @@
   #   - always:   Trim down prompt when accepting a command line.
   #   - same-dir: Trim down prompt when accepting a command line unless this is the first command
   #               typed after changing current working directory.
-  typeset -g POWERLEVEL9K_TRANSIENT_PROMPT=off
+  typeset -g POWERLEVEL9K_TRANSIENT_PROMPT=always
 
   # Instant prompt mode.
   #
