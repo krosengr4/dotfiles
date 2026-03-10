@@ -40,8 +40,10 @@ keybind = cmd+f=toggle_maximize
 keybind = cmd+r=reload_config
 keybind = cmd+i=inspector:toggle
 keybind = cmd+u=check_for_updates
-keybind = ctrl+[=scroll_page_up
-keybind = ctrl+]=scroll_page_down
+keybind = ctrl+b=scroll_page_up
+keybind = ctrl+f=scroll_page_down
+keybind = alt+h=unbind
+keybind = alt+l=unbind
 
 # Window size and position 
 #------------------------------
@@ -84,9 +86,9 @@ macos-option-as-alt = true
 ##### Favorite Themes #####
 #--------------------------------------------------------------------------
 #theme = glacier
-theme = Rose Pine Moon
+#theme = Rose Pine Moon
 #theme = fahrenheit
-#theme = Homebrew
+theme = Homebrew
 
 
 ##### Other Themes #####
@@ -141,13 +143,14 @@ cursor-color = #FFFFFF
 ##### Font #####
 #------------------------ --------------------------------------------------
 #font-family = Fira Code Nerd Font
-#font-family = Hack Nerd Font
+font-family = Hack Nerd Font
 #font-family = JetBrains Mono Nerd Font
 #font-family = Inconsolata Nerd Font
 #font-family = Monaco
-font-family = Menlo
+#font-family = Menlo
 #font-family = Space Mono Nerd Font
 #font-family = SauceCodePro Nerd Font
+#font-family = meslo NF
 
 font-size = 18
 
@@ -163,7 +166,7 @@ font-size = 18
 #selection-background = #FF2F92
 
 # Sky
-#selection-background = #76D6FF
+selection-background = #76D6FF
 
 # Honeydew
 #selection-background = #D4FB79
@@ -175,11 +178,24 @@ font-size = 18
 #selection-background = #945200
 
 # Purplish Maroon
-selection-background = #430942
+#selection-background = #430942
+
+# Tin
+#selection-background = #919191
 
 ##### FOREGROUND #####
+
 # Basic light(ish) blue
-selection-foreground = #007DD6
+#selection-foreground = #007DD6
+
+# Blueberry
+selection-foreground = #0433FF
+
+# Flora (light green)
+#selection-foreground = #73FA79
+
+# Orchid
+#selection-foreground = #7A81FF
 
 ################################################################
 
@@ -187,3 +203,6 @@ selection-foreground = #007DD6
 
 # Snow White
 split-divider-color = #FFFFFF
+
+# Homebrew green
+split-divider-color = #00F900
