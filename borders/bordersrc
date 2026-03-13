@@ -1,0 +1,13 @@
+#!/bin/bash
+
+export PATH="/opt/homebrew/bin:$PATH"
+
+options=(
+    style=round
+    width=9
+    hidpi=off
+    active_color="glow(0xAA00ff00)"
+    inactive_color=0xffffffff
+)
+
+borders "${options[@]}"
