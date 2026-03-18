@@ -1,3 +1,4 @@
+
 #!/usr/bin/env zsh
 
 CONFIG="$HOME/.config/ghostty/config"
@@ -5,10 +6,10 @@ CONFIG="$HOME/.config/ghostty/config"
 # Profiles: theme|cursor-color|selection-background|selection-foreground|split-divider-color
 declare -A PROFILES
 PROFILES[glacier]="glacier|#FFFFFF|#76D6FF|#0433FF|#FFFFFF"
-PROFILES[rosepine]="Rose Pine Moon|#FFAAFF|#0091B4|#D4FB79|#FFAAFF"
-PROFILES[fahrenheit]="fahrenheit|#AA7942|#945200|#007DD6|#00F900"
+PROFILES[rosepine]="Rose Pine Moon|#929292|#0091B4|#D4FB79|#FFAAFF"
+PROFILES[fahrenheit]="fahrenheit|#AA7942|#945200|#00DAFF|#500000"
 PROFILES[homebrew]="Homebrew|#00F900|#945200|#FFFFFF|#00F900"
-PROFILES[mocha]="Ciapre|#945200|#945200|#007DD6|#FFFFFF"
+PROFILES[mocha]="Ciapre|#945200|#945200|#00DAFF|#5F4E4A"
 
 usage() {
   echo "Usage: ghostty-theme <profile>"
