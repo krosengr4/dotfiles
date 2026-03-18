@@ -65,6 +65,7 @@ vim.opt.hlsearch = true
 vim.opt.mouse = 'a'     
 
 -- Keymaps
+vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic' })
 vim.keymap.set({'n', 'v'}, '<leader>y', '"+y', { desc = 'Yank to clipboard' })
 vim.keymap.set({'n', 'v'}, '<leader>p', '"+p', { desc = 'Paste from clipboard' })
 vim.api.nvim_create_user_command('DiffOrig', function()                                                                                                      local ft = vim.bo.filetype

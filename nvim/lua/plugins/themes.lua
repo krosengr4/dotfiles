@@ -1,33 +1,80 @@
 -- This file should return a list/table of plugins
+
+local function get_ghostty_theme()
+  local config = vim.fn.expand('~/.config/ghostty/config')
+  local f = io.open(config, 'r')
+  if not f then return nil end
+  local theme = nil
+  for line in f:lines() do
+    local t = line:match('^theme%s*=%s*(.+)$')
+    if t then theme = t:gsub('%s+$', '') end
+  end
+  f:close()
+  return theme
+end
+
+local ghostty_theme = get_ghostty_theme()
+
+local theme_map = {
+  ['Rose Pine Moon'] = 'rose-pine',
+  ['Homebrew']       = 'bamboo',
+}
+
+local nvim_theme = theme_map[ghostty_theme] or 'rose-pine'
+
 return {
   {
-    'catppuccin/nvim',
-    name = 'catppuccin', -- Important name for lazy.nvim
-    lazy = false,       -- Load immediately
-    priority = 1000,    -- Ensure it loads before others
+    'rose-pine/neovim',
+    name = 'rose-pine',
+    lazy = false,
+    priority = 1000,
 
-    -- This 'opts' table holds the configuration for Catppuccin
     opts = {
-      -- 🌟 THIS IS THE KEY LINE FOR MOCHA 🌟
-      flavour = 'mocha', 
+      variant = 'moon',
+      dark_variant = 'moon',
+      dim_inactive_windows = false,
+      extend_background_behind_borders = true,
 
-      transparent_background = true, -- Set to true if you want your terminal background to show through
+      styles = {
+        bold = true,
+        italic = true,
+        transparency = true,
+      },
+
       integrations = {
-        -- Set to true for any other plugins you might use (e.g., nvim-cmp, gitsigns, etc.)
         cmp = true,
         gitsigns = true,
         nvimtree = true,
-        -- You can add more integrations here as you add more plugins
+        telescope = { enabled = true },
       },
     },
 
-    -- This 'config' function runs after the plugin is loaded
     config = function(_, opts)
-      -- Set up Catppuccin with the options defined above
-      require('catppuccin').setup(opts)
-      
-      -- 💡 ACTIVATE THE COLORSCHEME 💡
-      vim.cmd.colorscheme 'catppuccin'
+      require('rose-pine').setup(opts)
+      if nvim_theme == 'rose-pine' then
+        vim.cmd.colorscheme 'rose-pine'
+      end
+    end,
+  },
+  {
+    'ribru17/bamboo.nvim',
+    lazy = false,
+    priority = 999,
+    config = function()
+      require('bamboo').setup({
+        style = 'multiplex',
+        highlights = {
+          Normal        = { bg = '#000000' },
+          NormalNC      = { bg = '#000000' },
+          NormalFloat   = { bg = '#000000' },
+          SignColumn    = { bg = '#000000' },
+          FoldColumn    = { bg = '#000000' },
+          EndOfBuffer   = { bg = '#000000' },
+        },
+      })
+      if nvim_theme == 'bamboo' then
+        vim.cmd.colorscheme 'bamboo'
+      end
     end,
   },
 }
