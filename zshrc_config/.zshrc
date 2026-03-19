@@ -1,3 +1,5 @@
+typeset -U path
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -43,7 +45,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # DISABLE_LS_COLORS="true"
 
 # Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
+DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
 # ENABLE_CORRECTION="true"
@@ -138,6 +140,8 @@ alias help=run-help
 # Terminal alias
 alias reload="source ~/.zshrc"
 alias rld="source ~/.zshrc"
+alias rldaero="aerospace reload-config"
+alias sbarrld="sketchybar --reload"
 alias clr="clear"
 
 # RosenPi alias
@@ -163,6 +167,7 @@ alias gob="go build"
 # Ghostty alias
 alias ghothem="ghostty +list-themes"
 alias ghobin="ghostty +list-keybinds --default"
+alias chtheme="ghostty-theme"
 
 #Opening webpages
 alias ghub="open https://github.com/krosengr4"
@@ -196,9 +201,11 @@ alias stemo="open -a SteerMouse"
 # Open config files
 alias confz="nvim ~/.zshrc"
 alias confgho="nvim ~/.config/ghostty/config"
+alias confaer="nvim ~/.config/aerospace/aerospace.toml"
 
 # Environment variables
 export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/go/bin:$PATH"
 
 # Load local secrets (not tracked in git)
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
@@ -209,6 +216,16 @@ autoload -Uz compinit
 compinit
 # End of Docker CLI completions
 
+# Ghostty current dir tab/window title
+autoload -Uz add-zsh-hook
+_set_tab_title() { echo -ne "\033]0;${PWD##*/}\007" }
+_set_tab_title_preexec() {
+  case "${1%% *}" in
+    nvim|vi|vim) echo -ne "\033]0;nvim | ${PWD##*/}\007" ;;
+  esac
+}
+add-zsh-hook precmd _set_tab_title
+add-zsh-hook preexec _set_tab_title_preexec
 
 # Zoxide directory finder
 eval "$(zoxide init zsh)"
@@ -249,9 +266,12 @@ showColors() {
         print -P "%F{$i}Color $i%f"
     done
 }
+# alias for colors function ^
+alias shcol="showColors"
 
 # configure p10k file
-alias confpk='nvim ~/.p10k.zsh'
+alias confpk='nvim ~/.config/p10k/.p10k.zsh'
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+[[ ! -f ~/.config/p10k/.p10k.zsh ]] || source ~/.config/p10k/.p10k.zsh
+

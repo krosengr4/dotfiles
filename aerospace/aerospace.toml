@@ -30,12 +30,12 @@ persistent-workspaces = ['1', '2', '3', '4', 'Q', 'W', 'E', 'R']
     preset = 'qwerty'
 
 [gaps]
-    inner.horizontal = 10
-    outer.left       = 5
+    inner.horizontal = 6
+    outer.left       = 9
     outer.bottom     = 5
-    inner.vertical   = 10
-    outer.top        = 39
-    outer.right      = 5
+    inner.vertical   = 6
+    outer.top        = 38
+    outer.right      = 9
 
 [mode.main.binding]
     # Layout

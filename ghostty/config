@@ -1,7 +1,8 @@
 # Template file automatically created at the following path:
 #   /Users/kevinrosengren/Library/Application Support/com.mitchellh.ghostty/config
 
-# ***** Ghostty docs: https://ghostty.org/docs/config/reference
+# ***** Ghostty docs: 
+# https://ghostty.org/docs/config/reference
 
 # Run `ghostty +show-config --default --docs` to view a list of
 # all available config options and their default values.
@@ -17,9 +18,9 @@ adjust-cell-height = 40%
 
 # MacOS Ghostty Icon
 #------------------------------
-#macos-icon = official
+macos-icon = official
 #macos-icon = blueprint
-macos-icon = chalkboard
+#macos-icon = chalkboard
 #macos-icon = microchip
 #macos-icon = glass
 #macos-icon = holographic
@@ -45,22 +46,37 @@ keybind = ctrl+f=scroll_page_down
 keybind = alt+h=unbind
 keybind = alt+l=unbind
 
-# Window size and position 
+# Window 
 #------------------------------
-window-save-state = never
+window-save-state = always
 
-window-height = 40
-window-width = 120
+window-height = 28
+window-width = 130
 
-window-position-x = 100
-window-position-y = 150
+window-position-x = 60
+window-position-y = 40
+
+window-titlebar-background = #FFFFFF
+window-titlebar-foreground = #500000
+
+window-show-tab-bar = auto
+macos-titlebar-style = tabs
+
+window-title-font-family = Hack
+#window-title-font-family = JetBrains Mono Nerd Font
+#window-title-font-family = Inconsolata Nerd Font
+#window-title-font-family = Monaco
+#window-title-font-family = Menlo
+#window-title-font-family = Space Mono Nerd Font
+#window-title-font-family = SauceCodePro Nerd Font
+#window-title-font-family = meslo NF
 
 # Quick Terminal
 #------------------------------
 quick-terminal-animation-duration = .2
 quick-terminal-screen = mouse
 quick-terminal-position = top
-quick-terminal-size = 50%, 100%
+quick-terminal-size = 63%, 100%
 keybind = global:cmd+backquote=toggle_quick_terminal
 
 # Extras
@@ -68,12 +84,12 @@ keybind = global:cmd+backquote=toggle_quick_terminal
 window-inherit-working-directory = true
 window-colorspace = "display-p3"
 
-window-show-tab-bar = always
-macos-titlebar-style = transparent
+
 
 macos-shortcuts = allow
 
 window-padding-x = 10
+window-padding-y = 10
 
 keybind = shift+enter=text:\x1b\r
 
@@ -86,9 +102,10 @@ macos-option-as-alt = true
 ##### Favorite Themes #####
 #--------------------------------------------------------------------------
 #theme = glacier
-#theme = Rose Pine Moon
+theme = Rose Pine Moon
 #theme = fahrenheit
-theme = Homebrew
+#theme = Homebrew
+#theme = Ciapre
 
 
 ##### Other Themes #####
@@ -98,7 +115,6 @@ theme = Homebrew
 #theme = ayu
 #theme = Carbonfox
 #theme = Catppuccin Mocha
-#theme = Ciapre
 #theme = Flatland
 #theme = Aurora
 #theme = 12-bit Rainbow
@@ -117,7 +133,7 @@ theme = Homebrew
 
 ##### Cursor #####
 #--------------------------------------------------------------------------
-shell-integration-features = no-cursor
+shell-integration-features = no-cursor, no-title
 cursor-style = block_hollow
 cursor-style-blink = true
 
@@ -134,7 +150,7 @@ cursor-style-blink = true
 #cursor-color = #945200
 
 # Snow White
-cursor-color = #FFFFFF
+cursor-color = #929292
 
 
 ################################################################
@@ -152,7 +168,7 @@ font-family = Hack Nerd Font
 #font-family = SauceCodePro Nerd Font
 #font-family = meslo NF
 
-font-size = 18
+font-size = 17
 
 
 ################################################################
@@ -166,7 +182,7 @@ font-size = 18
 #selection-background = #FF2F92
 
 # Sky
-selection-background = #76D6FF
+selection-background = #0091B4
 
 # Honeydew
 #selection-background = #D4FB79
@@ -189,7 +205,7 @@ selection-background = #76D6FF
 #selection-foreground = #007DD6
 
 # Blueberry
-selection-foreground = #0433FF
+selection-foreground = #D4FB79
 
 # Flora (light green)
 #selection-foreground = #73FA79
@@ -202,7 +218,7 @@ selection-foreground = #0433FF
 ##### OTHERS #####
 
 # Snow White
-split-divider-color = #FFFFFF
+#split-divider-color = #FFFFFF
 
 # Homebrew green
-split-divider-color = #00F900
+split-divider-color = #FFAAFF
