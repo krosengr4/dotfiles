@@ -220,8 +220,16 @@ compinit
 autoload -Uz add-zsh-hook
 _set_tab_title() { echo -ne "\033]0;${PWD##*/}\007" }
 _set_tab_title_preexec() {
-  case "${1%% *}" in
-    nvim|vi|vim) echo -ne "\033]0;nvim | ${PWD##*/}\007" ;;
+  local cmd="${1%% *}"
+  local args="${1#* }"
+  case "$cmd" in
+    nvim|vi|vim)
+      if [[ "$args" != "$cmd" ]]; then
+        echo -ne "\033]0;nvim ${args##*/} | ${PWD##*/}\007"
+      else
+        echo -ne "\033]0;nvim | ${PWD##*/}\007"
+      fi
+      ;;
   esac
 }
 add-zsh-hook precmd _set_tab_title
