@@ -1,0 +1,2 @@
+#!/usr/bin/env sh
+open -a Finder "${1:-$PWD}"
