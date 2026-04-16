@@ -83,6 +83,28 @@ vim.keymap.set("n", "<D-v>", '"+p')
 vim.keymap.set("v", "<D-v>", '"+p')
 vim.keymap.set("i", "<D-v>", '<C-r>+')
 
+-- Option+Backspace: delete previous word (insert mode)
+vim.keymap.set("i", "<M-BS>", "<C-w>", { desc = "Delete previous word" })
+
+-- Cmd+Backspace: delete to beginning of line (insert mode)
+vim.keymap.set("i", "<D-BS>", "<C-u>", { desc = "Delete to beginning of line" })
+
+-- Option+Delete: forward delete one word (insert mode)
+vim.keymap.set("i", "<M-Del>", "<C-o>dw", { desc = "Forward delete word" })
+
+-- Cmd+Delete: forward delete to end of line (insert mode)
+vim.keymap.set("i", "<D-Del>", "<C-o>D", { desc = "Forward delete to end of line" })
+
+-- Option+Left/Right: move one word back/forward (insert mode)
+-- Terminal sends ESC+b / ESC+f (readline word-movement sequences)
+vim.keymap.set("i", "<M-b>", "<C-Left>", { desc = "Move back one word" })
+vim.keymap.set("i", "<M-f>", "<C-Right>", { desc = "Move forward one word" })
+
+-- Cmd+Left/Right: move to beginning/end of line (insert mode)
+-- Terminal sends Ctrl+A / Ctrl+E (readline line-movement sequences)
+vim.keymap.set("i", "<C-a>", "<Home>", { desc = "Move to beginning of line" })
+vim.keymap.set("i", "<C-e>", "<End>", { desc = "Move to end of line" })
+
 -- Move lines up/down
 vim.keymap.set("n", "<A-Down>", ":m .+1<CR>==", { desc = "Move line down" })
 vim.keymap.set("n", "<A-Up>", ":m .-2<CR>==", { desc = "Move line up" })

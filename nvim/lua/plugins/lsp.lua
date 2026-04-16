@@ -30,4 +30,18 @@ vim.api.nvim_create_autocmd("BufWritePre", {
     end,
 })
 
+vim.lsp.config('html', {
+    cmd = { 'vscode-html-language-server', '--stdio' },
+    filetypes = { 'html' },
+    root_markers = { '.git' },
+})
+vim.lsp.enable('html')
+
+vim.lsp.config('cssls', {
+    cmd = { 'vscode-css-language-server', '--stdio' },
+    filetypes = { 'css', 'scss', 'less' },
+    root_markers = { '.git' },
+})
+vim.lsp.enable('cssls')
+
 return {}
