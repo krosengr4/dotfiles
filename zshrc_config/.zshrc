@@ -197,6 +197,7 @@ alias opost="open -a Postman"
 alias tascl="open -a Tailscale"
 alias omes="open -a Messages"
 alias stemo="open -a SteerMouse"
+alias cpick="open -a 'Color Picker'"
 
 # Open config files
 alias confz="nvim ~/.zshrc"
@@ -283,3 +284,23 @@ alias confpk='nvim ~/.config/p10k/.p10k.zsh'
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.config/p10k/.p10k.zsh ]] || source ~/.config/p10k/.p10k.zsh
 
+# Setting EDITOR AND VISUAL
+export EDITOR=nvim
+export VISUAL=nvim
+
+# nnn
+export NNN_PLUG='o:nuke;f:finder;z:z'
+export NNN_OPENER=~/.config/nnn/plugins/nuke
+export NNN_GIT=1
+
+n() {
+    [ "${NNNLVL:-0}" -eq 0 ] || { echo "nnn is already running"; return; }
+    export NNN_TMPFILE="${XDG_CONFIG_HOME:-$HOME/.config}/nnn/.lastd"
+    ~/.local/bin/nnn -cG "$@"
+    [ -f "$NNN_TMPFILE" ] && { . "$NNN_TMPFILE"; rm -f "$NNN_TMPFILE"; }
+}
+
+# nvm
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
