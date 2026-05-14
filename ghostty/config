@@ -9,8 +9,8 @@
 
 ##########################################################################################
 
-background-opacity = .9
-background-blur = 15
+background-opacity = .85
+background-blur = 20
 
 window-theme = ghostty
 
@@ -18,12 +18,12 @@ adjust-cell-height = 40%
 
 # MacOS Ghostty Icon
 #------------------------------
-macos-icon = official
+#macos-icon = official
 #macos-icon = blueprint
 #macos-icon = chalkboard
 #macos-icon = microchip
 #macos-icon = glass
-#macos-icon = holographic
+macos-icon = holographic
 #macos-icon = paper
 #macos-icon = retro
 #macos-icon = xray
@@ -41,7 +41,7 @@ keybind = cmd+f=toggle_maximize
 keybind = cmd+r=reload_config
 keybind = cmd+i=inspector:toggle
 keybind = cmd+u=check_for_updates
-keybind = ctrl+b=scroll_page_up
+# keybind = ctrl+b=scroll_page_up
 keybind = ctrl+f=scroll_page_down
 keybind = alt+h=unbind
 keybind = alt+l=unbind
@@ -59,21 +59,17 @@ window-position-y = 40
 window-titlebar-background = #FFFFFF
 window-titlebar-foreground = #500000
 
-window-show-tab-bar = auto
+window-show-tab-bar = always
 macos-titlebar-style = tabs
 
-window-title-font-family = Hack
-#window-title-font-family = JetBrains Mono Nerd Font
-#window-title-font-family = Inconsolata Nerd Font
-#window-title-font-family = Monaco
-#window-title-font-family = Menlo
-#window-title-font-family = Space Mono Nerd Font
+window-title-font-family = Maple Mono NF
+#window-title-font-family = VictorMono Nerd Font
 #window-title-font-family = SauceCodePro Nerd Font
-#window-title-font-family = meslo NF
+#window-title-font-family = BlexMono Nerd Font
 
 # Quick Terminal
 #------------------------------
-quick-terminal-animation-duration = .2
+quick-terminal-animation-duration = .1
 quick-terminal-screen = mouse
 quick-terminal-position = top
 quick-terminal-size = 63%, 100%
@@ -102,11 +98,15 @@ macos-option-as-alt = true
 ##### Favorite Themes #####
 #--------------------------------------------------------------------------
 #theme = glacier
-theme = Rose Pine Moon
+#theme = Ciapre
 #theme = fahrenheit
 #theme = Homebrew
-#theme = Ciapre
 
+#theme = glacier
+theme = Liquid Carbon Transparent
+#theme = duckbones
+#theme = ryuuko
+#theme = novel
 
 ##### Other Themes #####
 #--------------------------------------------------------------------------
@@ -136,21 +136,10 @@ theme = Rose Pine Moon
 shell-integration-features = no-cursor, no-title
 cursor-style = block_hollow
 cursor-style-blink = true
-
-# System Red
-#cursor-color = #AB1942
-
-# Orchid
-#cursor-color = #7A81FF
-
-# Faded Brown
-#cursor-color = #AA7942
-
-# Mocha
-#cursor-color = #945200
-
-# Snow White
-cursor-color = #929292
+cursor-color = #8F0D0B
+selection-background = #D6D6D6
+selection-foreground = #011993
+split-divider-color = #500000
 
 
 ################################################################
@@ -159,66 +148,14 @@ cursor-color = #929292
 ##### Font #####
 #------------------------ --------------------------------------------------
 #font-family = Fira Code Nerd Font
-font-family = Hack Nerd Font
+#font-family = Hack Nerd Font
 #font-family = JetBrains Mono Nerd Font
-#font-family = Inconsolata Nerd Font
-#font-family = Monaco
-#font-family = Menlo
+#font-family = Hack Nerd Font
 #font-family = Space Mono Nerd Font
 #font-family = SauceCodePro Nerd Font
 #font-family = meslo NF
+font-family = Terminess Nerd Font
+#font-family = Monaco
+#font-family = Menlo
 
-font-size = 17
-
-
-################################################################
-
-
-##### Highlighting Color #####
-#--------------------------------------------------------------------------
-##### BACKGROUND #####
-
-# Strawberry
-#selection-background = #FF2F92
-
-# Sky
-selection-background = #0091B4
-
-# Honeydew
-#selection-background = #D4FB79
-
-# Orchid
-#selection-background = #7A81FF
-
-# Mocha
-#selection-background = #945200
-
-# Purplish Maroon
-#selection-background = #430942
-
-# Tin
-#selection-background = #919191
-
-##### FOREGROUND #####
-
-# Basic light(ish) blue
-#selection-foreground = #007DD6
-
-# Blueberry
-selection-foreground = #D4FB79
-
-# Flora (light green)
-#selection-foreground = #73FA79
-
-# Orchid
-#selection-foreground = #7A81FF
-
-################################################################
-
-##### OTHERS #####
-
-# Snow White
-#split-divider-color = #FFFFFF
-
-# Homebrew green
-split-divider-color = #FFAAFF
+font-size = 21

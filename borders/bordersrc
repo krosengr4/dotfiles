@@ -4,10 +4,11 @@ export PATH="/opt/homebrew/bin:$PATH"
 
 options=(
     style=round
-    width=9
-    hidpi=off
-    active_color="glow(0xAA00ff00)"
-    inactive_color=0xffffffff
+    width=10
+    hidpi=on
+    active_color="glow(0xAA00F900)"
+    inactive_color=0xff000000
+    background_color=0x00000000
 )
 
 borders "${options[@]}"

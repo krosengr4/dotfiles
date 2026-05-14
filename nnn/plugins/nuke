@@ -132,10 +132,10 @@ handle_image() {
 }
 
 handle_video() {
-    if [ "$GUI" -ne 0 ]; then
-        if is_mac; then
-            nohup open "${FPATH}" >/dev/null 2>&1 &
-        elif type smplayer >/dev/null 2>&1; then
+    if is_mac; then
+        nohup open "${FPATH}" >/dev/null 2>&1 &
+    elif [ "$GUI" -ne 0 ]; then
+        if type smplayer >/dev/null 2>&1; then
             nohup smplayer "${FPATH}" >/dev/null 2>&1 &
         elif type mpv >/dev/null 2>&1; then
             nohup mpv "${FPATH}" >/dev/null 2>&1 &
@@ -191,7 +191,7 @@ handle_extension() {
             exit 1;;
 
         ## Image
-        bmp|gif|jpeg|jpg|png|svg|tiff|webp)
+        bmp|gif|heic|jpeg|jpg|png|svg|tiff|webp)
             handle_image;;
 
         ## Audio
@@ -200,7 +200,7 @@ handle_extension() {
             exit 1;;
 
         ## Video
-        avi|mkv|mp4)
+        avi|mkv|mp4|mov)
             handle_video
             exit 1;;
 

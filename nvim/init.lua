@@ -54,8 +54,16 @@ vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 
 -- Better navigation
-vim.opt.wrap = false    
-vim.opt.smartindent = true 
+vim.opt.wrap = false
+vim.opt.smartindent = true
+vim.opt.colorcolumn = "100"
+
+vim.api.nvim_create_autocmd("ColorScheme", {
+  pattern = "*",
+  callback = function()
+    vim.api.nvim_set_hl(0, "ColorColumn", { link = "CursorLine" })
+  end,
+})
 
 -- Better searching
 vim.opt.incsearch = true  
@@ -83,6 +91,16 @@ vim.keymap.set("n", "<D-v>", '"+p')
 vim.keymap.set("v", "<D-v>", '"+p')
 vim.keymap.set("i", "<D-v>", '<C-r>+')
 
+-- Black-hole deletes: don't clobber clipboard on delete/change/substitute
+vim.keymap.set({ 'n', 'v' }, 'd', '"_d',  { desc = 'Delete (no clipboard)' })
+vim.keymap.set('n',          'D', '"_D',  { desc = 'Delete to EOL (no clipboard)' })
+vim.keymap.set({ 'n', 'v' }, 'c', '"_c',  { desc = 'Change (no clipboard)' })
+vim.keymap.set('n',          'C', '"_C',  { desc = 'Change to EOL (no clipboard)' })
+vim.keymap.set({ 'n', 'v' }, 's', '"_s',  { desc = 'Substitute char (no clipboard)' })
+vim.keymap.set('n',          'S', '"_S',  { desc = 'Substitute line (no clipboard)' })
+vim.keymap.set({ 'n', 'v' }, 'x', '"_x',  { desc = 'Delete char (no clipboard)' })
+vim.keymap.set('n',          'X', '"_X',  { desc = 'Delete char back (no clipboard)' })
+
 -- Option+Backspace: delete previous word (insert mode)
 vim.keymap.set("i", "<M-BS>", "<C-w>", { desc = "Delete previous word" })
 
@@ -104,6 +122,20 @@ vim.keymap.set("i", "<M-f>", "<C-Right>", { desc = "Move forward one word" })
 -- Terminal sends Ctrl+A / Ctrl+E (readline line-movement sequences)
 vim.keymap.set("i", "<C-a>", "<Home>", { desc = "Move to beginning of line" })
 vim.keymap.set("i", "<C-e>", "<End>", { desc = "Move to end of line" })
+
+-- Spell check for text filetypes
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "text", "markdown", "gitcommit" },
+  callback = function()
+    vim.opt_local.spell = true
+    vim.opt_local.spelllang = "en_us"
+  end,
+})
+
+-- Cmd+/ to toggle comment
+vim.keymap.set("n", "<D-/>", "gcc", { remap = true, desc = "Toggle comment" })
+vim.keymap.set("v", "<D-/>", "gc",  { remap = true, desc = "Toggle comment" })
+vim.keymap.set("i", "<D-/>", "<Esc>gcc", { remap = true, desc = "Toggle comment" })
 
 -- Move lines up/down
 vim.keymap.set("n", "<A-Down>", ":m .+1<CR>==", { desc = "Move line down" })

@@ -1,0 +1,24 @@
+scan_paths:
+    - /Users/kevinrosengren/programming/code-projects/full-stack/byteboard/byteboard-service
+    - /Users/kevinrosengren/programming/code-projects/full-stack/rosenblog/blogginrose-service
+    - /Users/kevinrosengren/programming/code-projects/go-projects/tdl-go
+    - /Users/kevinrosengren/programming/code-projects/go-projects/concurrent-web-scraper
+    - /Users/kevinrosengren/programming/code-projects/go-projects/gh-tree
+    - /Users/kevinrosengren/programming/code-projects/java-projects/chatter-jam
+    - /Users/kevinrosengren/programming/code-projects/python-projects/online-store-python
+ignore_patterns:
+    - '**/node_modules/**'
+    - '**/vendor/**'
+    - '**/.cache/**'
+    - '**/.npm/**'
+    - '**/.pnpm/**'
+    - '**/__pycache__/**'
+    - '**/.venv/**'
+    - '**/venv/**'
+    - '**/.tox/**'
+    - '**/target/**'
+    - '**/build/**'
+    - '**/dist/**'
+max_depth: 10
+poll_interval: 5s
+auto_refresh: true

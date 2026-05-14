@@ -7,10 +7,10 @@ sketchybar --add item volume right \
            --add slider volume.slider popup.volume 250 \
            --set volume.slider \
                                slider.highlight_color=$ACCENT_COLOR \
-                               slider.background.height=6 \
+                               slider.background.height=10 \
                                slider.background.corner_radius=3 \
                                slider.background.color=0xff3a3a3a \
-                               background.color=0xffffffff \
+                               background.color=0xff000000 \
                                slider.knob="􀀁" \
                                slider.knob.drawing=on \
                                click_script='osascript -e "set volume output volume $PERCENTAGE"'

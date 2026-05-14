@@ -1,4 +1,6 @@
 vim.keymap.set('n', 'K', vim.lsp.buf.hover, { desc = 'LSP hover docs' })
+vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Next diagnostic' })
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Prev diagnostic' })
 vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { desc = 'Go to definition' })
 vim.keymap.set('n', 'gr', vim.lsp.buf.references, { desc = 'Go to references' })
 vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, { desc = 'Rename symbol' })
@@ -29,6 +31,13 @@ vim.api.nvim_create_autocmd("BufWritePre", {
         vim.lsp.buf.format({ async = false })
     end,
 })
+
+vim.lsp.config('ts_ls', {
+    cmd = { 'typescript-language-server', '--stdio' },
+    filetypes = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact' },
+    root_markers = { 'package.json', 'tsconfig.json', 'jsconfig.json', '.git' },
+})
+vim.lsp.enable('ts_ls')
 
 vim.lsp.config('html', {
     cmd = { 'vscode-html-language-server', '--stdio' },
