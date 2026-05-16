@@ -53,6 +53,12 @@ vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4  
 vim.opt.expandtab = true
 
+-- Keep inode stable on save so file watchers (e.g. Glance) don't lose track
+vim.opt.backupcopy = "yes"
+
+-- Single global statusline across all windows
+vim.opt.laststatus = 0
+
 -- Better navigation
 vim.opt.wrap = false
 vim.opt.smartindent = true
@@ -73,6 +79,7 @@ vim.opt.hlsearch = true
 vim.opt.mouse = 'a'     
 
 -- Keymaps
+vim.keymap.set('n', '<C-q>', '<Nop>', { desc = 'Disabled (use <C-v> for visual block)' })
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic' })
 vim.keymap.set({'n', 'v'}, '<leader>y', '"+y', { desc = 'Yank to clipboard' })
 vim.keymap.set({'n', 'v'}, '<leader>p', '"+p', { desc = 'Paste from clipboard' })
@@ -100,6 +107,12 @@ vim.keymap.set({ 'n', 'v' }, 's', '"_s',  { desc = 'Substitute char (no clipboar
 vim.keymap.set('n',          'S', '"_S',  { desc = 'Substitute line (no clipboard)' })
 vim.keymap.set({ 'n', 'v' }, 'x', '"_x',  { desc = 'Delete char (no clipboard)' })
 vim.keymap.set('n',          'X', '"_X',  { desc = 'Delete char back (no clipboard)' })
+
+-- Insert mode cursor movement (Ctrl+hjkl)
+vim.keymap.set("i", "<C-h>", "<Left>",  { desc = "Move cursor left" })
+vim.keymap.set("i", "<C-j>", "<Down>",  { desc = "Move cursor down" })
+vim.keymap.set("i", "<C-k>", "<Up>",    { desc = "Move cursor up" })
+vim.keymap.set("i", "<C-l>", "<Right>", { desc = "Move cursor right" })
 
 -- Option+Backspace: delete previous word (insert mode)
 vim.keymap.set("i", "<M-BS>", "<C-w>", { desc = "Delete previous word" })
@@ -142,3 +155,7 @@ vim.keymap.set("n", "<A-Down>", ":m .+1<CR>==", { desc = "Move line down" })
 vim.keymap.set("n", "<A-Up>", ":m .-2<CR>==", { desc = "Move line up" })
 vim.keymap.set("v", "<A-Down>", ":m '>+1<CR>gv=gv", { desc = "Move selection down" })
 vim.keymap.set("v", "<A-Up>", ":m '<-2<CR>gv=gv", { desc = "Move selection up" })
+vim.keymap.set("n", "<A-j>", ":m .+1<CR>==", { desc = "Move line down" })
+vim.keymap.set("n", "<A-k>", ":m .-2<CR>==", { desc = "Move line up" })
+vim.keymap.set("v", "<A-j>", ":m '>+1<CR>gv=gv", { desc = "Move selection down" })
+vim.keymap.set("v", "<A-k>", ":m '<-2<CR>gv=gv", { desc = "Move selection up" })

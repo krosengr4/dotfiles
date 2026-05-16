@@ -9,6 +9,14 @@ return {
           preview = {
             treesitter = false,
           },
+          mappings = {
+            i = {
+              ["<C-q>"] = require('telescope.actions').send_to_qflist + require('telescope.actions').open_qflist,
+            },
+            n = {
+              ["<C-q>"] = require('telescope.actions').send_to_qflist + require('telescope.actions').open_qflist,
+            },
+          },
         },
       })
 
