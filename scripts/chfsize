@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+CONFIG="$HOME/.config/ghostty/config"
+
+if [[ "${1:-}" == "--current" || "${1:-}" == "-c" ]]; then
+  grep -E '^font-size = ' "$CONFIG" | sed 's/font-size = //'
+  exit 0
+fi
+
+if [[ $# -ne 1 ]]; then
+  echo "Usage: chfsize <size>"
+  echo "Example: chfsize 20 or chfsize 18.5"
+  exit 1
+fi
+
+SIZE="$1"
+
+if ! [[ "$SIZE" =~ ^[0-9]+(\.[0-9]+)?$ ]]; then
+  echo "Error: '$SIZE' is not a valid font size"
+  exit 1
+fi
+
+if grep -qE '^font-size = ' "$CONFIG"; then
+  sed -i '' "s|^font-size = .*|font-size = $SIZE|" "$CONFIG"
+else
+  echo "font-size = $SIZE" >> "$CONFIG"
+fi
+
+echo "Font size set to: $SIZE"

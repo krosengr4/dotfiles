@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+CONFIG="$HOME/.config/ghostty/config"
+
+if [[ "${1:-}" == "--current" || "${1:-}" == "-c" ]]; then
+  grep -E '^font-family = ' "$CONFIG" | sed 's/font-family = //'
+  exit 0
+fi
+
+if [[ $# -eq 0 ]]; then
+  echo "Usage: chfont <Font Name Words...>"
+  echo "Example: chfont JetBrains Mono Nerd Font"
+  exit 1
+fi
+
+FONT_NAME="$*"
+
+if grep -qE '^font-family = ' "$CONFIG"; then
+  sed -i '' "s|^font-family = .*|font-family = $FONT_NAME|" "$CONFIG"
+else
+  echo "font-family = $FONT_NAME" >> "$CONFIG"
+fi
+
+echo "Font set to: $FONT_NAME"

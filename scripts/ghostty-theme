@@ -1,0 +1,64 @@
+#!/usr/bin/env zsh
+
+CONFIG="$HOME/.config/ghostty/config"
+
+declare -A PROFILES
+# GLACIER: theme|cursor-color|selection-background|selection-foreground|split-divider-color
+PROFILES[glacier]="glacier|#FFFFFF|#76D6FF|#0433FF|#FFFFFF"
+# ROSEPINE: theme|cursor-color|selection-background|selection-foreground|split-divider-color
+PROFILES[rosepine]="Rose Pine Moon|#929292|#000000|#FF85FF|#FFAAFF"
+# FAHRENHEIT: theme|cursor-color|selection-background|selection-foreground|split-divider-color
+PROFILES[fahrenheit]="fahrenheit|#AA7942|#945200|#00DAFF|#500000"
+# HOMEBREW: theme|cursor-color|selection-background|selection-foreground|split-divider-color
+PROFILES[homebrew]="Homebrew|#00F900|#945200|#FFFFFF|#00F900"
+# CIAPRE: theme|cursor-color|selection-background|selection-foreground|split-divider-color
+PROFILES[ciapre]="Ciapre|#945200|#945200|#00DAFF|#5F4E4A"
+# SEASHELLS: theme|cursor-color|selection-background|selection-foreground|split-divider-color
+PROFILES[seashells]="Sea Shells|#73FCD6|#0000B6|00D797|#1A14F0"
+# GRUVBOX MATERIAL: theme|cursor-color|selection-background|selection-foreground|split-divider-color
+PROFILES[gruvbox]="Gruvbox Material Dark|#DFAD4F|#011993|#00FA92|#FF2600"
+# NOVEL: theme|cursor-color|selection-background|selection-foreground|split-divider-color
+PROFILES[novel]="Novel|#690000|#000000|#73FA79|#690000"
+# LIQUID CARBON: theme|cursor-color|selection-background|selection-foreground|split-divider-color
+PROFILES[liqcarbon]="Liquid Carbon Transparent|#8F0D0B|#D6D6D6|#011993|#500000"
+
+usage() {
+  echo "Usage: ghostty-theme <profile>"
+  echo ""
+  echo "Available profiles:"
+  for key in ${(ko)PROFILES}; do
+    IFS='|' read -r t _ _ _ _ <<< "${PROFILES[$key]}"
+    printf "  %-12s (theme: %s)\n" "$key" "$t"
+  done
+}
+
+if [[ -z "$1" || "$1" == "--help" || "$1" == "-h" ]]; then
+  usage
+  exit 0
+fi
+
+PROFILE="$1"
+
+if [[ -z "${PROFILES[$PROFILE]}" ]]; then
+  echo "Error: unknown profile '$PROFILE'"
+  echo ""
+  usage
+  exit 1
+fi
+
+IFS='|' read -r t_theme t_cursor t_selbg t_selfg t_divider <<< "${PROFILES[$PROFILE]}"
+
+patch() {
+  local key="$1"
+  local val="$2"
+  # Replace the first active (uncommented) occurrence of the key
+  sed -i '' "s/^${key} = .*/${key} = ${val}/" "$CONFIG"
+}
+
+patch "theme"                "$t_theme"
+patch "cursor-color"         "$t_cursor"
+patch "selection-background" "$t_selbg"
+patch "selection-foreground" "$t_selfg"
+patch "split-divider-color"  "$t_divider"
+
+echo "Switched to '$PROFILE' — press Cmd+R in Ghostty to reload"
