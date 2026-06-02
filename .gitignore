@@ -1,0 +1,10 @@
+# Claude Code local settings (machine-specific permissions)
+**/.claude/settings.local.json
+
+# Compiled sketchybar helper binaries
+sketchybar/helpers/event_providers/cpu_load/bin/
+sketchybar/helpers/event_providers/network_load/bin/
+sketchybar/helpers/menus/bin/
+
+# macOS noise
+.DS_Store
