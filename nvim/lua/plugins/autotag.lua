@@ -4,8 +4,9 @@ return {
     build = ':TSUpdate',
     main = 'nvim-treesitter',
     opts = {
-      ensure_installed = { 'html', 'css' },
+      ensure_installed = { 'html', 'css', 'go', 'lua', 'javascript', 'typescript' },
       highlight = { enable = true },
+      indent = { enable = true },
     },
   },
   {

@@ -53,4 +53,11 @@ vim.lsp.config('cssls', {
 })
 vim.lsp.enable('cssls')
 
+vim.lsp.config('emmet_language_server', {
+    cmd = { 'emmet-language-server', '--stdio' },
+    filetypes = { 'html', 'css', 'scss', 'less', 'javascriptreact', 'typescriptreact' },
+    root_markers = { '.git' },
+})
+vim.lsp.enable('emmet_language_server')
+
 return {}

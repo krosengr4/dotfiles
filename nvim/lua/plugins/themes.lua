@@ -1,34 +1,16 @@
 -- This file should return a list/table of plugins
-
-local function get_ghostty_theme()
-  local config = vim.fn.expand('~/.config/ghostty/config')
-  local f = io.open(config, 'r')
-  if not f then return nil end
-  local theme = nil
-  for line in f:lines() do
-    local t = line:match('^theme%s*=%s*(.+)$')
-    if t then theme = t:gsub('%s+$', '') end
-  end
-  f:close()
-  return theme
+local function get_nvim_theme()
+    local f = io.open(vim.fn.expand('~/.config/nvim/theme'), 'r')
+    if not f then return nil end
+    local theme = f:read('*l'):gsub('%s+$', '')
+    f:close()
+    return theme
 end
 
-local ghostty_theme = get_ghostty_theme()
-
-local theme_map = {
-  ['Rose Pine Moon'] = 'rose-pine',
-  ['Homebrew']       = 'caret',
-  ['Ciapre']         = 'tokyonight',
-  ['glacier']        = 'nightfox',
-  ['fahrenheit']     = 'gruvbox-material',
-  ['Sea Shells']     = 'oceanic-next',
-  ['Novel']          = 'melange',
-}
-
-local nvim_theme = theme_map[ghostty_theme] or 'rose-pine'
+local nvim_theme = get_nvim_theme() or 'moonbow'
 
 return {
-  {
+ {
     'rose-pine/neovim',
     name = 'rose-pine',
     lazy = false,
@@ -43,7 +25,7 @@ return {
       styles = {
         bold = true,
         italic = true,
-        transparency = true,
+        transparency = false,
       },
 
       integrations = {
@@ -61,55 +43,13 @@ return {
       end
     end,
   },
-  {
-    'mhartington/oceanic-next',
-    lazy = false,
-    priority = 999,
-    config = function()
-      vim.g.oceanic_next_terminal_bold = 1
-      vim.g.oceanic_next_terminal_italic = 1
-      if nvim_theme == 'oceanic-next' then
-        vim.cmd.colorscheme 'OceanicNext'
-        local groups = { 'Normal', 'NormalNC', 'NormalFloat', 'SignColumn', 'FoldColumn', 'EndOfBuffer', 'LineNr', 'CursorLineNr' }
-        for _, g in ipairs(groups) do
-          vim.api.nvim_set_hl(0, g, { bg = 'NONE' })
-        end
-      end
-    end,
-  },
-  {
-    'sainnhe/gruvbox-material',
-    lazy = false,
-    priority = 999,
-    config = function()
-      vim.g.gruvbox_material_background = 'hard'
-      vim.g.gruvbox_material_enable_italic = true
-      vim.g.gruvbox_material_transparent_background = 1
-      if nvim_theme == 'gruvbox-material' then
-        vim.cmd.colorscheme 'gruvbox-material'
-      end
-    end,
-  },
-  {
-    'EdenEast/nightfox.nvim',
-    lazy = false,
-    priority = 999,
-    config = function()
-      require('nightfox').setup({
-        options = { transparent = false },
-      })
-      if nvim_theme == 'nightfox' then
-        vim.cmd.colorscheme 'nightfox'
-      end
-    end,
-  },
-  {
+ {
     'folke/tokyonight.nvim',
     lazy = false,
     priority = 999,
     opts = {
       style = 'night',
-      transparent = true,
+      transparent = false,
     },
     config = function(_, opts)
       require('tokyonight').setup(opts)
@@ -138,18 +78,41 @@ return {
     lazy = false,
     priority = 999,
     config = function()
-      require('caret').setup({
-        options = {
-          transparent = true,
-          styles = {
-            bold = true,
-            italic = true,
-          },
-        },
-      })
       if nvim_theme == 'caret' then
+        require('caret').setup({
+          options = {
+            transparent = true,
+            styles = {
+              bold = true,
+              italic = true,
+            },
+          },
+        })
         vim.opt.background = 'dark'
-        vim.cmd.colorscheme 'caret'
+      end
+    end,
+  },
+  {
+    'arturgoms/moonbow.nvim',
+    lazy = false,
+    priority = 999,
+    config = function()
+      require('moonbow').setup({
+        options = {transparent = false },
+      })
+      if nvim_theme == 'moonbow' then
+        vim.cmd.colorscheme 'moonbow'
+      end
+    end,
+  },
+  {
+    'vimcolorschemes/olive-crt.nvim',
+    lazy = false,
+    priority = 999,
+    config = function()
+      if nvim_theme == 'olive-crt' then
+        require('olive_crt').setup({})
+        vim.cmd.colorscheme 'olive-crt'
       end
     end,
   },

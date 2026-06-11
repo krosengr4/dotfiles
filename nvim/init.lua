@@ -56,8 +56,8 @@ vim.opt.expandtab = true
 -- Keep inode stable on save so file watchers (e.g. Glance) don't lose track
 vim.opt.backupcopy = "yes"
 
--- Single global statusline across all windows
-vim.opt.laststatus = 0
+-- Lualine manages the global statusline (laststatus = 3)
+-- vim.opt.laststatus = 0
 
 -- Better navigation
 vim.opt.wrap = false
@@ -136,6 +136,29 @@ vim.keymap.set("i", "<M-f>", "<C-Right>", { desc = "Move forward one word" })
 vim.keymap.set("i", "<C-a>", "<Home>", { desc = "Move to beginning of line" })
 vim.keymap.set("i", "<C-e>", "<End>", { desc = "Move to end of line" })
 
+-- Treesitter-based folding (folds start open)
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+vim.opt.foldlevelstart = 99
+
+-- Fallback to indent-based folding for filetypes with no treesitter fold queries
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "css", "scss" },
+  callback = function()
+    vim.opt_local.foldmethod = "indent"
+  end,
+})
+
+-- Persist fold state across sessions
+vim.api.nvim_create_autocmd("BufWinLeave", {
+  pattern = "?*",
+  callback = function() vim.cmd("silent! mkview") end,
+})
+vim.api.nvim_create_autocmd("BufWinEnter", {
+  pattern = "?*",
+  callback = function() vim.cmd("silent! loadview") end,
+})
+
 -- Spell check for text filetypes
 vim.api.nvim_create_autocmd("FileType", {
   pattern = { "text", "markdown", "gitcommit" },
@@ -144,6 +167,10 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.opt_local.spelllang = "en_us"
   end,
 })
+
+-- gh/gl: move to beginning/end of line (normal and visual)
+vim.keymap.set({ "n", "v" }, "gh", "^", { desc = "Move to first non-whitespace" })
+vim.keymap.set({ "n", "v" }, "gl", "$", { desc = "Move to end of line" })
 
 -- Cmd+/ to toggle comment
 vim.keymap.set("n", "<D-/>", "gcc", { remap = true, desc = "Toggle comment" })
