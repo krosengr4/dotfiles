@@ -9,24 +9,16 @@
 
 ##########################################################################################
 
-background-opacity = .85
-background-blur = 20
+background-opacity = .9
+background-blur = 30
 
-window-theme = ghostty
+window-theme = auto
 
 adjust-cell-height = 40%
 
 # MacOS Ghostty Icon
 #------------------------------
-#macos-icon = official
-#macos-icon = blueprint
-#macos-icon = chalkboard
-#macos-icon = microchip
-#macos-icon = glass
-macos-icon = holographic
-#macos-icon = paper
-#macos-icon = retro
-#macos-icon = xray
+macos-icon = chalkboard
 
 # Key-binds
 #------------------------------
@@ -39,10 +31,7 @@ keybind = cmd+p=toggle_command_palette
 keybind = cmd+z=undo
 keybind = cmd+f=toggle_maximize
 keybind = cmd+r=reload_config
-keybind = cmd+i=inspector:toggle
 keybind = cmd+u=check_for_updates
-# keybind = ctrl+b=scroll_page_up
-keybind = ctrl+f=scroll_page_down
 keybind = alt+h=unbind
 keybind = alt+l=unbind
 
@@ -50,8 +39,8 @@ keybind = alt+l=unbind
 #------------------------------
 window-save-state = always
 
-window-height = 28
-window-width = 130
+window-height = 25
+window-width = 100
 
 window-position-x = 60
 window-position-y = 40
@@ -59,20 +48,22 @@ window-position-y = 40
 window-titlebar-background = #FFFFFF
 window-titlebar-foreground = #500000
 
-window-show-tab-bar = always
-macos-titlebar-style = tabs
+macos-titlebar-style = transparent
 
-window-title-font-family = Maple Mono NF
+macos-window-shadow = true
+
+#window-title-font-family = Maple Mono NF
 #window-title-font-family = VictorMono Nerd Font
 #window-title-font-family = SauceCodePro Nerd Font
 #window-title-font-family = BlexMono Nerd Font
+window-title-font-family = MesloLGS Nerd Font 
 
 # Quick Terminal
 #------------------------------
-quick-terminal-animation-duration = .1
+quick-terminal-animation-duration = .2
 quick-terminal-screen = mouse
-quick-terminal-position = top
-quick-terminal-size = 63%, 100%
+quick-terminal-position = center
+quick-terminal-size = 100%, 100%
 keybind = global:cmd+backquote=toggle_quick_terminal
 
 # Extras
@@ -103,29 +94,17 @@ macos-option-as-alt = true
 #theme = Homebrew
 
 #theme = glacier
-theme = Liquid Carbon Transparent
+theme = Embers Dark
+
+### THEMES TO TRY
+#theme = embers dark
+#theme = ayu
+#theme = Cobalt Next Dark
+#theme = coffee theme
 #theme = duckbones
 #theme = ryuuko
-#theme = novel
 
-##### Other Themes #####
-#--------------------------------------------------------------------------
-#theme = Apple classic
-#theme = Argonaut 
-#theme = ayu
-#theme = Carbonfox
-#theme = Catppuccin Mocha
-#theme = Flatland
-#theme = Aurora
-#theme = 12-bit Rainbow
-#theme = Cyberdyne
-#theme = ENCOM
-#theme = phala green dark
-#theme = catppuccin mocha
-#theme = floraverse
-#theme = Cobalt Next Dark
-#theme = CGA
-#theme = Elementary
+
 
 
 ################################################################
@@ -136,10 +115,10 @@ theme = Liquid Carbon Transparent
 shell-integration-features = no-cursor, no-title
 cursor-style = block_hollow
 cursor-style-blink = true
-cursor-color = #8F0D0B
-selection-background = #D6D6D6
-selection-foreground = #011993
-split-divider-color = #500000
+cursor-color = #0096FF
+selection-background = #000000
+selection-foreground = #73FCD6
+split-divider-color = #0096FF
 
 
 ################################################################
@@ -158,4 +137,4 @@ font-family = Terminess Nerd Font
 #font-family = Monaco
 #font-family = Menlo
 
-font-size = 21
+font-size = 22

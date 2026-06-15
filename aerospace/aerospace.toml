@@ -37,11 +37,11 @@ persistent-workspaces = ['1', '2', '3', 'Q', 'W', 'E', 'A', 'S', 'D']
 
 [gaps]
     inner.horizontal = 6
-    outer.left       = 9
+    outer.left       = 15
     outer.bottom     = 13
     inner.vertical   = 6
     outer.top        = 7
-    outer.right      = 9
+    outer.right      = 15
 
 [mode.main.binding]
     # Layout
@@ -107,13 +107,10 @@ persistent-workspaces = ['1', '2', '3', 'Q', 'W', 'E', 'A', 'S', 'D']
 if.app-id = 'com.mitchellh.ghostty'
 run = ['move-node-to-workspace 2', 'layout floating']
 [[on-window-detected]]
-if.app-id = 'com.apple.finder'
-run = ['move-node-to-workspace E', 'layout floating']
-[[on-window-detected]]
-if.app-id = 'com.microsoft.VSCode'
+if.app-id = 'com.apple.Notes'
 run = ['move-node-to-workspace E']
 [[on-window-detected]]
-if.app-id = 'com.apple.Notes'
+if.app-id = 'com.microsoft.VSCode'
 run = ['move-node-to-workspace Q']
 
 [mode.service.binding]
