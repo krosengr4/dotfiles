@@ -1,0 +1,262 @@
+general:
+    # Borders are drawn by JankyBorders (~/.config/borders/bordersrc) since
+    # GlazeWM's native border effect is Windows 11-only and won't render on macOS.
+    startup_commands:
+        ["shell-exec /bin/bash /Users/kevinrosengren/.config/borders/bordersrc"]
+    shutdown_commands: []
+    config_reload_commands: []
+
+    focus_follows_cursor: false
+
+    # AeroSpace only does the back-and-forth jump via its dedicated
+    # workspace-back-and-forth command (bound below to alt+tab as
+    # `focus --recent-workspace`) -- re-pressing the same workspace key is a
+    # no-op there, so this stays off to match.
+    toggle_workspace_on_refocus: false
+
+    cursor_jump:
+        enabled: true
+        trigger: "monitor_focus"
+
+    # Forced to place_in_corner on macOS regardless of this value.
+    hide_method: "place_in_corner"
+
+    show_all_in_taskbar: false
+
+gaps:
+    scale_with_dpi: true
+    inner_gap: "6px"
+    outer_gap:
+        top: "7px"
+        right: "15px"
+        bottom: "13px"
+        left: "15px"
+
+window_effects:
+    # Disabled: JankyBorders (started above) handles border highlighting on
+    # macOS instead. These keys are Windows 11-only and would otherwise no-op.
+    focused_window:
+        border:
+            enabled: false
+            color: "#8dbcff"
+        hide_title_bar:
+            enabled: false
+        corner_style:
+            enabled: false
+            style: "square"
+        transparency:
+            enabled: false
+            opacity: "95%"
+    other_windows:
+        border:
+            enabled: false
+            color: "#a1a1a1"
+        hide_title_bar:
+            enabled: false
+        corner_style:
+            enabled: false
+            style: "square"
+        transparency:
+            enabled: false
+            opacity: "0%"
+
+window_behavior:
+    initial_state: "tiling"
+    state_defaults:
+        floating:
+            centered: true
+            shown_on_top: false
+        fullscreen:
+            maximized: false
+            shown_on_top: false
+
+# Mirrors AeroSpace's workspace-to-monitor-force-assignment + persistent-workspaces.
+# Monitor indices are 0-based (AeroSpace's monitor 1/2/3 -> 0/1/2 here).
+workspaces:
+    - name: "1"
+      bind_to_monitor: 0
+      keep_alive: true
+    - name: "2"
+      bind_to_monitor: 1
+      keep_alive: true
+    - name: "3"
+      bind_to_monitor: 2
+      keep_alive: true
+    - name: "Q"
+      bind_to_monitor: 0
+      keep_alive: true
+    - name: "W"
+      bind_to_monitor: 1
+      keep_alive: true
+    - name: "E"
+      bind_to_monitor: 2
+      keep_alive: true
+    - name: "A"
+      bind_to_monitor: 0
+      keep_alive: true
+    - name: "S"
+      bind_to_monitor: 1
+      keep_alive: true
+    - name: "D"
+      bind_to_monitor: 2
+      keep_alive: true
+
+window_rules:
+    - commands: ["ignore"]
+      match:
+          - window_process: { equals: "zebar" }
+          - window_title: { regex: "[Pp]icture.in.[Pp]icture" }
+            window_class: { regex: "Chrome_WidgetWin_1|MozillaDialogClass" }
+          - window_process: { equals: "PowerToys" }
+            window_class: { regex: 'HwndWrapper\[PowerToys\.PowerAccent.*?\]' }
+          - window_title: { equals: "Command Palette" }
+            window_class: { equals: "WinUIDesktopWin32WindowClass" }
+          - window_process: { equals: "PowerToys" }
+            window_title: { regex: ".*? - Peek" }
+          - window_process: { equals: "Lively" }
+            window_class: { regex: "HwndWrapper" }
+          - window_process: { equals: "EXCEL" }
+            window_class: { not_regex: "XLMAIN" }
+          - window_process: { equals: "WINWORD" }
+            window_class: { not_regex: "OpusApp" }
+          - window_process: { equals: "POWERPNT" }
+            window_class: { not_regex: "PPTFrameClass" }
+
+    # --- Ported from AeroSpace's [[on-window-detected]] blocks. ---
+    # window_process values are BEST GUESSES (macOS populates this from the
+    # app's process name, not its bundle id like AeroSpace used) -- verify with
+    # `glazewm query windows` once each app is open, see Verification below.
+    - commands: ["move --workspace 2", "set-floating"]
+      match:
+          - window_process: { equals: "Ghostty" }
+    - commands: ["move --workspace Q"]
+      match:
+          - window_process: { equals: "Notes" }
+    - commands: ["move --workspace E"]
+      match:
+          - window_process: { equals: "Code" }
+    - commands: ["move --workspace A"]
+      match:
+          - window_process: { equals: "Messages" }
+
+binding_modes:
+    - name: "resize"
+      keybindings:
+          - commands: ["resize --width -2%"]
+            bindings: ["h", "left"]
+          - commands: ["resize --width +2%"]
+            bindings: ["l", "right"]
+          - commands: ["resize --height +2%"]
+            bindings: ["k", "up"]
+          - commands: ["resize --height -2%"]
+            bindings: ["j", "down"]
+          - commands: ["wm-disable-binding-mode --name resize"]
+            bindings: ["escape", "enter"]
+
+keybindings:
+    # Focus
+    - commands: ["focus --direction left"]
+      bindings: ["alt+h", "alt+left"]
+    - commands: ["focus --direction right"]
+      bindings: ["alt+l", "alt+right"]
+    - commands: ["focus --direction up"]
+      bindings: ["alt+k", "alt+up"]
+    - commands: ["focus --direction down"]
+      bindings: ["alt+j", "alt+down"]
+
+    # Move window
+    - commands: ["move --direction left"]
+      bindings: ["alt+shift+h", "alt+shift+left"]
+    - commands: ["move --direction right"]
+      bindings: ["alt+shift+l", "alt+shift+right"]
+    - commands: ["move --direction up"]
+      bindings: ["alt+shift+k", "alt+shift+up"]
+    - commands: ["move --direction down"]
+      bindings: ["alt+shift+j", "alt+shift+down"]
+
+    # Resize (no "smart" resize in GlazeWM -- explicit width/height + a resize mode instead)
+    - commands: ["resize --width -2%"]
+      bindings: ["alt+u"]
+    - commands: ["resize --width +2%"]
+      bindings: ["alt+p"]
+    - commands: ["resize --height +2%"]
+      bindings: ["alt+o"]
+    - commands: ["resize --height -2%"]
+      bindings: ["alt+i"]
+    - commands: ["wm-enable-binding-mode --name resize"]
+      bindings: ["alt+r"]
+
+    - commands: ["wm-toggle-pause"]
+      bindings: ["alt+shift+p"]
+
+    # Closest available approximation of AeroSpace's explicit `layout tiles ...` binding.
+    - commands: ["toggle-tiling-direction"]
+      bindings: ["alt+v"]
+
+    - commands: ["wm-cycle-focus"]
+      bindings: ["alt+space"]
+    - commands: ["toggle-floating --centered"]
+      bindings: ["alt+shift+space"]
+    - commands: ["toggle-tiling"]
+      bindings: ["alt+z"]
+    - commands: ["toggle-fullscreen"]
+      bindings: ["alt+f"]
+    - commands: ["toggle-minimized"]
+      bindings: ["alt+m"]
+    - commands: ["wm-reload-config"]
+      bindings: ["alt+shift+r"]
+    - commands: ["wm-redraw"]
+      bindings: ["alt+shift+b"]
+
+    # Launch a terminal (was `shell-exec cmd`, a Windows-only command -- fixed to open Ghostty).
+    - commands: ["shell-exec open -a Ghostty"]
+      bindings: ["alt+enter"]
+
+    # Switch workspace -- mirrors AeroSpace's 1/2/3/Q/W/E/A/S/D scheme exactly.
+    - commands: ["focus --workspace 1"]
+      bindings: ["alt+1"]
+    - commands: ["focus --workspace 2"]
+      bindings: ["alt+2"]
+    - commands: ["focus --workspace 3"]
+      bindings: ["alt+3"]
+    - commands: ["focus --workspace Q"]
+      bindings: ["alt+q"]
+    - commands: ["focus --workspace W"]
+      bindings: ["alt+w"]
+    - commands: ["focus --workspace E"]
+      bindings: ["alt+e"]
+    - commands: ["focus --workspace A"]
+      bindings: ["alt+a"]
+    - commands: ["focus --workspace S"]
+      bindings: ["alt+s"]
+    - commands: ["focus --workspace D"]
+      bindings: ["alt+d"]
+
+    # Mirrors AeroSpace's workspace-back-and-forth.
+    - commands: ["focus --recent-workspace"]
+      bindings: ["alt+tab"]
+
+    # Move focused window to workspace + follow it there.
+    - commands: ["move --workspace 1", "focus --workspace 1"]
+      bindings: ["alt+shift+1"]
+    - commands: ["move --workspace 2", "focus --workspace 2"]
+      bindings: ["alt+shift+2"]
+    - commands: ["move --workspace 3", "focus --workspace 3"]
+      bindings: ["alt+shift+3"]
+    - commands: ["move --workspace Q", "focus --workspace Q"]
+      bindings: ["alt+shift+q"]
+    - commands: ["move --workspace W", "focus --workspace W"]
+      bindings: ["alt+shift+w"]
+    - commands: ["move --workspace E", "focus --workspace E"]
+      bindings: ["alt+shift+e"]
+    - commands: ["move --workspace A", "focus --workspace A"]
+      bindings: ["alt+shift+a"]
+    - commands: ["move --workspace S", "focus --workspace S"]
+      bindings: ["alt+shift+s"]
+    - commands: ["move --workspace D", "focus --workspace D"]
+      bindings: ["alt+shift+d"]
+
+    # Closest approximation of AeroSpace's move-workspace-to-monitor (wrap-around
+    # "next" maps to a fixed rightward direction since GlazeWM has no cyclic version).
+    - commands: ["move-workspace --direction right"]
+      bindings: ["alt+shift+tab"]
